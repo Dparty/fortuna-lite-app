@@ -1,0 +1,338 @@
+@import "../login/index.wxss";
+.smsCode{display: flex;justify-content:space-between;border-bottom: 1px solid #ddd;padding-right: 10%}
+.smsCode input{width: 336rpx;}
+.smsCode .getSmsCodeBtn{font-size: 30rpx; color:#3B243D;width:216rpx;box-sizing: border-box; height: 80rpx;line-height: 80rpx;margin-top: 10rpx;margin-right: 0}
+
+
+.content{
+  display: flex;
+  flex-direction: column; 
+  text-align: center; 
+  background-color: #3B243D; 
+  height: 100%; 
+  width: 100%;
+}
+
+.navBg {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -100; 
+}
+
+.logo{margin-right: 80rpx;}
+.logo image{width:280rpx;height: 280rpx}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding-top: 40rpx;
+  padding-bottom: 0rpx; 
+}
+
+.header-bg{
+  background-size:  100%; 
+  padding: 120rpx 10rpx 10rpx 10rpx;
+}
+
+.header-left{
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.header-text{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-left: 45rpx;
+}
+
+.header-main{
+  font-size: 45rpx;
+  margin-bottom: 15rpx;
+}
+
+.header-sub{
+  font-size: 30rpx;
+}
+
+
+.form-wrapper{
+  /* height: 100%; */
+  flex: 1;
+  background-color:  #FFFBF2;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.input-area{
+  text-align: left;
+  padding: 40rpx 50rpx 0rpx 40rpx;
+}
+.input-area input{height:100rpx;line-height: 100rpx;}
+
+.btn-area button{
+  background-color: #F8D585;
+  margin-top: 40rpx;
+  color: #331735;
+  font-size: 30rpx;
+  padding: 10rpx;
+  font-weight: bold;
+}
+
+.birthBox{
+  display: flex;
+  align-items: center;
+}
+
+.birthBox label{
+  color: #ADA3AD;
+  margin-right: 50rpx;
+}
+
+
+.usertype-checkbox{
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+/* 繁简切换 */
+.traditional {
+  /* background: #D1D1D1; */
+  /* border: 1rpx solid #E5E5E5; */
+  /* border-radius: 100rpx; */
+  /* height: 68rpx; */
+  width: 220rpx;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  /* position: fixed; */
+  /* bottom: 500rpx; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+}
+
+.traditional{
+  width: 100rpx;
+  margin: 50rpx 50rpx 0rpx 50rpx;
+}
+
+.vertical-moulding{
+  border-left: 1px solid gray;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+.traditional view {
+  flex: 1;
+  /* width: 130rpx; */
+}
+
+.menu_normal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #69707f;
+  /* background: #D1D1D1; */
+  border-radius: 34rpx;
+  /* height: 68rpx; */
+  font-size: 32rpx;
+}
+
+.menu_highlighted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  /* background: #49b8a3; */
+  /* border: 1rpx solid #49b8a3; */
+  /* border-radius: 34rpx; */
+  /* height: 68rpx; */
+  font-size: 32rpx;
+}
+
+
+
+
+.arrow_down {
+  position: relative;
+  left: 10rpx;
+  top: 20rpx;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  border-width: 10rpx;
+  border-color: #3B243D transparent transparent transparent;
+  border-style: dotted dotted solid dotted;
+}
+.input {
+  font-size: 30rpx;
+}
+
+.commeon_css{
+  display: flex;
+  height: 80rpx;
+  /* width: 100%; */
+  align-items: center;
+  flex-direction: row;
+  /* padding: 84rpx 0rpx 30rpx 0rpx; */
+  border-bottom: 2rpx solid #F2F2F2;
+}
+
+.code_input .get_code {
+  display: flex;
+  justify-content: space-between;
+}
+.get_code .code_txt {
+  font-size: 28rpx;
+}
+
+.tel_left{
+  display: flex;
+  min-width: 15%;
+  margin-right: 25rpx; 
+}
+
+/* 单选 */
+
+.gender-select{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 50rpx 0 0;
+}
+.option-list {
+  /* background: white; */
+  /* padding: 0 40rpx; */
+  height: 100rpx;
+  display: flex;
+  /* align-items: flex-end; */
+  /* justify-content: space-between; */
+  border-bottom: 1px solid #efefef;
+}
+
+.radio-group {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  /* align-items: flex-end; */
+  /* justify-content: space-between; */
+}
+
+.radio-group .radio {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+
+.radio-group .radio text {
+  margin-left: -5rpx;
+}
+
+radio {
+  transform: scale(0.6);
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+
+radio .wx-radio-input.wx-radio-input-checked {
+  /* border: none; */
+  border-color: #3B243D  !important;
+  /* background-color: #fff!important; *//* background-color: transparent!important; *//* 居中 *//* 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  */
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  /* 去除对号 */
+  content: '';
+  /* background: #fff; */
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  /* background: red; */
+  background-color: #3B243D ;
+  /* 居中 *//* margin-top: 0rpx; *//* display: flex; *//* position: relative; */
+}
+
+
+
+/* 复选 */
+
+.usertype-checkbox{
+  font-size: 30rpx;
+}
+checkbox-group {
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+checkbox-group label {
+  display: flex;
+}
+checkbox-group label view {
+  /* margin-left: -10rpx;  */
+  align-self: center;
+}
+checkbox-group label:nth-child(1) {
+  margin-right: 30rpx;
+}
+checkbox-group label:nth-child(2) {
+  margin-right: 20rpx;
+}
+checkbox {
+  transform: scale(0.6);
+  align-self: center;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  /* 改变对号颜色 */
+  /* color: #3B243D ; */
+  font-weight: 700;
+}
+
+
+/* picker */
+
+.picker {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+
+
+.username{
+  display: none;
+  color: #ADA3AD;
+}
+
+.ph-username{
+  display: block;
+  color: #ADA3AD;
+}
+.ph-username-active{
+  display: none;
+}
+
+.username-active{
+  position: absolute;
+  font-size: 12px;
+  /* background: white; */
+  margin: 0 0 20px 0;
+
+  color: #ADA3AD;
+}
+
+

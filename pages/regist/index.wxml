@@ -1,0 +1,109 @@
+<wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+
+<view class="content">
+  <image class="navBg" mode="widthFix" src="/images/background.png"></image>
+  <view class="header-bg" style="background-image: url(/images/background.png);">
+    <view class="header">
+      <view class="header-left">
+        <view class="header-text">
+          <p class="header-main">{{chs.convert('加入会员')}}</p>
+          <p class="header-sub">{{chs.convert('欢迎加入财神荟 ！')}}</p>
+        </view>
+        <!--繁简转化配置-->
+        <view class="traditional">
+          <view bindtap='switchTab' data-index='0' class="{{isTraditional === false ? 'menu_highlighted' : 'menu_normal'}}">
+            {{chs.convert('简')}}
+          </view>
+          <view class="vertical-moulding"></view>
+          <view bindtap='switchTab' data-index='1' class="{{isTraditional ? 'menu_highlighted' : 'menu_normal'}}">
+            {{chs.convert('繁')}}
+          </view>
+        </view>
+      </view>
+      <view class="logo">
+        <image mode="aspectFit" src="/images/logo_withbg1.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="form-wrapper">
+    <form bindsubmit="formSubmit">
+      <view class="input-area">
+
+        <text class="{{stUserName==0 ? 'username':'username-active'}}">姓名</text>
+        <input id="username" name="username" maxlength='11' type="text" placeholder-class="{{stUserName==0 ? 'ph-username':'ph-username-active'}}" placeholder='姓名' bindfocus="userNameFocus" bindblur='userNameBlur' bindinput="bindUserNameChange"></input>
+
+
+        <view class="birthBox">
+          <label>生日</label>
+          <picker mode="date" value="{{birthday}}" start="{{minDate}}" end="maxDate" bindchange="bindDateChange">
+            <view class="picker">
+              {{birthday}}
+            </view>
+          </picker>
+
+        </view>
+
+        <view class="gender-select">
+          <label>{{chs.convert("性别")}}</label>
+          <view class="option-list">
+
+            <radio-group class="radio-group" bindchange="radioChange">
+              <label class="radio" wx:for="{{radioChange}}" wx:key="index">
+                <radio value="{{item.value}}" checked="{{item.checked}}" color="#fff"></radio>
+                <text>{{item.name}}</text>
+              </label>
+            </radio-group>
+          </view>
+        </view>
+
+        <view class="commeon_css tel_input">
+          <view class="tel_left" bindtap="choosePhoneCode">
+
+            <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
+              <view class="picker">
+                +{{areaCode}}{{areaCodeArray[index].id}}
+              </view>
+
+            </picker>
+            <view class="arrow_down"></view>
+
+            <!-- <view>+{{areaCode}}{{areaCodeArray[currentChoose].name}}</view> -->
+
+
+          </view>
+
+          <view class="tel_right">
+            <input class="input" placeholder="{{chs.convert('电话号码')}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" />
+          </view>
+        </view>
+
+        <view class="smsCode">
+          <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="验证码" bindinput="verificationCodeChange" />
+          <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
+        </view>
+
+
+        <view class="usertype-checkbox">
+          <label>{{chs.convert("用户类型")}}</label>
+          <checkbox-group bindchange="handelItemChange">
+            <label wx:for="{{checkBoxList}}" wx:key="id">
+              <checkbox value="{{chs.convert(item.value)}}"></checkbox>
+              <view>{{chs.convert(item.name)}}</view>
+            </label>
+          </checkbox-group>
+        </view>
+
+      </view>
+      <view class="btn-area">
+        <button disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}" formType="submit" loading="{{btnLoading}}"> {{chs.convert(registBtnTxt)}} </button>
+        <view class="txt-area">
+          <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator>
+          <navigator redirect url="../login/index"><text class="register">登录账号</text></navigator>
+        </view>
+      </view>
+
+    </form>
+  </view>
+  <!--<progress class="myprogress" percent="{{percent }}" color="{{color}}" active/>-->
+
+</view>
