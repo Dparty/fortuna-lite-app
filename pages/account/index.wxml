@@ -1,0 +1,73 @@
+<wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+
+<view class="content">
+  <!-- <view class="logo">
+    <image mode="aspectFit" src="/images/logo.png"></image>
+  </view> -->
+  <view class="header">
+    <text class="header-text">{{chs.convert(welcomeText)}} , {{chs.convert(userName)}}</text>
+
+    <!--繁简转化配置-->
+    <view class="traditional">
+      <view bindtap='switchTab' data-index='0' class="{{isTraditional === false ? 'menu_highlighted' : 'menu_normal'}}">
+        {{chs.convert('简')}}
+      </view>
+      <view class="vertical-moulding"></view>
+      <view bindtap='switchTab' data-index='1' class="{{isTraditional ? 'menu_highlighted' : 'menu_normal'}}">
+        {{chs.convert('繁')}}
+      </view>
+    </view>
+  </view>
+
+  <view class="wrapper">
+    <image src="/images/logo_gd.png" class='avatar'></image>
+
+    <view class="main-content">
+      <text class="main-content-title"> {{chs.convert(title)}} </text>
+      <!-- <view> {{userName}} </view>
+    <view>{{userId}}</view> -->
+
+      <canvas class="main-content-canvas" canvas-id="myQrcode"></canvas>
+
+      <view class="main-content-bottom">
+        <view class="main-content-bottom-block" bindtap="notfinsh">
+          <text class="main-content-bottom-block-title"> {{chs.convert('积分')}} </text>
+          <text class="main-content-bottom-block-num"> {{'1249'}} </text>
+        </view>
+        <view class="vertical-moulding"></view>
+        <view class="main-content-bottom-block" bindtap="notfinsh">
+          <text class="main-content-bottom-block-title"> {{chs.convert('卡券')}} </text>
+          <text class="main-content-bottom-block-num"> {{'2'}} </text>
+        </view>
+
+      </view>
+
+    </view>
+
+  </view>
+
+
+  <view class="sub-menu">
+        <view class="sub-menu-block">
+          <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/userInfo.svg" />
+            </view>
+          <text class="sub-menu-text"> {{chs.convert('个人信息')}} </text>
+        </view>
+        <view class="sub-menu-block">
+          <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/private.svg" />
+            </view>
+          <text class="sub-menu-text"> {{chs.convert('隐私协议')}} </text>
+        </view>
+        <view class="sub-menu-block" bindtap='logout'>
+          <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/logout.svg" />
+            </view>
+          <text class="sub-menu-text"> {{chs.convert('退出登录')}} </text>
+        </view>
+       
+
+      </view>
+
+</view>

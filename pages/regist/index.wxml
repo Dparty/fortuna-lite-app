@@ -3,6 +3,7 @@
 <view class="content">
   <image class="navBg" mode="widthFix" src="/images/background.png"></image>
   <view class="header-bg" style="background-image: url(/images/background.png);">
+    <view class='left-icon' bindtap='_iconLeftTap'>{{'<'}}</view>
     <view class="header">
       <view class="header-left">
         <view class="header-text">
@@ -29,12 +30,24 @@
     <form bindsubmit="formSubmit">
       <view class="input-area">
 
-        <text class="{{stUserName==0 ? 'username':'username-active'}}">姓名</text>
-        <input id="username" name="username" maxlength='11' type="text" placeholder-class="{{stUserName==0 ? 'ph-username':'ph-username-active'}}" placeholder='姓名' bindfocus="userNameFocus" bindblur='userNameBlur' bindinput="bindUserNameChange"></input>
-
+        <view class="input-name-wrapper">
+          <view class="input-name-wrapper-main">
+            <text class="{{stUserName==0 ? 'hint':'hint-active'}}">姓名</text>
+            <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/userIcon.svg" />
+            </view>
+            <input id="username" name="username" maxlength='11' type="text" placeholder-class="{{stUserName==0 ? 'ph-hint':'ph-hint-active'}}" placeholder='姓名' bindfocus="userNameFocus" bindblur='userNameBlur' bindinput="bindUserNameChange"></input>
+          </view>
+          <view style='{{nameFlag}}' class="error-msg">用户名不能为空</view>
+        </view>
 
         <view class="birthBox">
-          <label>生日</label>
+          <view class="birthBox-left">
+            <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/birthIcon.svg" />
+            </view>
+            <label>生日</label>
+          </view>
           <picker mode="date" value="{{birthday}}" start="{{minDate}}" end="maxDate" bindchange="bindDateChange">
             <view class="picker">
               {{birthday}}
@@ -42,49 +55,75 @@
           </picker>
 
         </view>
-
-        <view class="gender-select">
-          <label>{{chs.convert("性别")}}</label>
-          <view class="option-list">
-
-            <radio-group class="radio-group" bindchange="radioChange">
-              <label class="radio" wx:for="{{radioChange}}" wx:key="index">
-                <radio value="{{item.value}}" checked="{{item.checked}}" color="#fff"></radio>
-                <text>{{item.name}}</text>
-              </label>
-            </radio-group>
-          </view>
-        </view>
-
-        <view class="commeon_css tel_input">
-          <view class="tel_left" bindtap="choosePhoneCode">
-
-            <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
-              <view class="picker">
-                +{{areaCode}}{{areaCodeArray[index].id}}
+        <view class="gender-select-wrapper">
+          <view class="gender-select">
+            <view class="gender-select-left">
+              <view class="svg_icon">
+                <image class="svg_icon-inner" src="../../images/path/genderIcon.svg" />
               </view>
-
-            </picker>
-            <view class="arrow_down"></view>
-
-            <!-- <view>+{{areaCode}}{{areaCodeArray[currentChoose].name}}</view> -->
+              <label>{{chs.convert("性别")}}</label>
+            </view>
 
 
+            <view class="option-list">
+
+              <radio-group class="radio-group" bindchange="radioChange">
+                <label class="radio" wx:for="{{radioChange}}" wx:key="index">
+                  <radio value="{{item.value}}" checked="{{item.checked}}" color="#fff"></radio>
+                  <text>{{item.name}}</text>
+                </label>
+              </radio-group>
+            </view>
           </view>
+          <view style='{{genderFlag}}' class="error-msg">{{chs.convert('需要选择性别')}}</view>
 
-          <view class="tel_right">
-            <input class="input" placeholder="{{chs.convert('电话号码')}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" />
-          </view>
         </view>
 
-        <view class="smsCode">
-          <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="验证码" bindinput="verificationCodeChange" />
-          <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
+        <view class="phone-wrapper">
+          <view class="commeon_css tel_input">
+            <view class="tel_left" bindtap="choosePhoneCode">
+              <view class="svg_icon">
+                <image class="svg_icon-inner" src="../../images/path/phoneIcon.svg" />
+              </view>
+              <text class="areaCode-top">区号</text>
+              <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
+                <view class="picker">
+                  +{{areaCode}}{{areaCodeArray[index].id}}
+                </view>
+
+              </picker>
+              <view class="arrow_down"></view>
+            </view>
+
+            <view class="tel_right">
+              <text class="{{stNumber==0 ? 'hint':'hint-active'}}">{{chs.convert('电话号码')}}</text>
+              <input class="input" placeholder="{{chs.convert('电话号码')}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" placeholder-class="{{stNumber==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="numberFocus" bindblur='numberBlur' />
+
+              <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
+            </view>
+          </view>
+          <view style='{{phoneFlag}}' class="error-msg">{{chs.convert('电话号码格式错误')}}</view>
+
         </view>
 
+        <view class="smsCode-wrapper">
+          <view class="smsCode">
+            <text class="{{stCode==0 ? 'hint':'hint-active'}}">验证码</text>
+            <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/codeIcon.svg" />
+            </view>
+            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="验证码" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
+          </view>
+          <view style='{{codeFlag}}' class="error-msg">{{chs.convert('验证码不能为空')}}</view>
+        </view>
 
         <view class="usertype-checkbox">
-          <label>{{chs.convert("用户类型")}}</label>
+          <view class="usertype-checkbox-left">
+            <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/userTypeIcon.svg" />
+            </view>
+            <label>{{chs.convert("用户类型")}}</label>
+          </view>
           <checkbox-group bindchange="handelItemChange">
             <label wx:for="{{checkBoxList}}" wx:key="id">
               <checkbox value="{{chs.convert(item.value)}}"></checkbox>
@@ -93,11 +132,22 @@
           </checkbox-group>
         </view>
 
+        <view class="agreement-checkbox">
+          <checkbox-group bindchange="checkboxChange">
+            <label class="checkbox">
+              <checkbox value="agree" checked="{{agreeChecked}}" />本人已阅读并同意
+              <text bindtap="agreement1">《隐私政策》</text>
+              及<text bindtap="agreement2">《用户协议》</text>
+            </label>
+          </checkbox-group>
+        </view>
+
+
       </view>
       <view class="btn-area">
         <button disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}" formType="submit" loading="{{btnLoading}}"> {{chs.convert(registBtnTxt)}} </button>
         <view class="txt-area">
-          <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator>
+          <!-- <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator> -->
           <navigator redirect url="../login/index"><text class="register">登录账号</text></navigator>
         </view>
       </view>

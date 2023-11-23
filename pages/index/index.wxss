@@ -19,3 +19,13 @@
 .user-motto {
   margin-top: 100px;
 }
+
+.btn-area{width: 80%;margin: 0 auto}
+.btn-area button{
+  background-color: #F8D585;
+  margin-top: 10rpx;
+  color: #331735;
+  font-size: 30rpx;
+  padding: 5rpx;
+  font-weight: bold;
+}

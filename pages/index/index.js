@@ -4,8 +4,11 @@ var app = getApp()
 Page({
   data: {
     motto: 'Hello wxapp',
-
-    userInfo: {}
+    loginBtnBgBgColor: "#F8D585",
+    registerBtnBgBgColor: "#F8D585",
+    userInfo: {},
+    loginBtnTxt: '会员登录',
+    registerBtnTxt: '立即加入'
   },
   //事件处理函数
   bindViewTap: function() {
@@ -18,8 +21,13 @@ Page({
       url: '../login/index'
     })
   },
+  toRegisterView:function(){
+    wx.navigateTo({
+     url: '../regist/index'
+   })
+ },
+
   onLoad: function () {
-    console.log('onLoad')
     var that = this
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){

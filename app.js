@@ -2,6 +2,15 @@
 App({
   
   onLaunch: function () {
+var that = this;
+    this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect()
+wx.getSystemInfo({ // iphonex底部适配
+	success: res => {
+		that.globalData.systeminfo = res
+	}
+})
+
+
     //调用API从本地缓存中获取数据
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -15,7 +24,8 @@ App({
   },
   globalData: {
     isTraditional: false,
-    userInfo:null
+    userInfo:null,
+    systeminfo: '',
   },
   getUserInfo:function(cb){
     var that = this

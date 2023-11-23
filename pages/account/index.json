@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "会员页",
+  "backgroundColor": "#fff",
+  "backgroundTextStyle": "light",
+  "navigationStyle": "custom"
+}
