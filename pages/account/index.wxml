@@ -1,22 +1,14 @@
-<wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+<wxs src="../../utils/chs.wxs" module="chs" />  {{chs.setTraditional(isTraditional)}}
 
-<view class="content">
-  <!-- <view class="logo">
-    <image mode="aspectFit" src="/images/logo.png"></image>
-  </view> -->
+<view wx:if="{{ifShowInfo}}" class="info-content">
+  <Info userInfo="{{userInfo}}" ifShowInfo="{{ifShowInfo}}"  isTraditional="{{isTraditional}}" bind:returnToAccount='returnToAccount'></Info>
+</view>
+
+<view wx:if="{{!ifShowInfo}}" class="content">
   <view class="header">
     <text class="header-text">{{chs.convert(welcomeText)}} , {{chs.convert(userName)}}</text>
 
-    <!--繁简转化配置-->
-    <view class="traditional">
-      <view bindtap='switchTab' data-index='0' class="{{isTraditional === false ? 'menu_highlighted' : 'menu_normal'}}">
-        {{chs.convert('简')}}
-      </view>
-      <view class="vertical-moulding"></view>
-      <view bindtap='switchTab' data-index='1' class="{{isTraditional ? 'menu_highlighted' : 'menu_normal'}}">
-        {{chs.convert('繁')}}
-      </view>
-    </view>
+    <TransLg isTraditional="{{isTraditional}}" bind:trans='trans'></TransLg>
   </view>
 
   <view class="wrapper">
@@ -48,7 +40,7 @@
 
 
   <view class="sub-menu">
-        <view class="sub-menu-block">
+        <view class="sub-menu-block" bindtap="showInfo">
           <view class="svg_icon">
               <image class="svg_icon-inner" src="../../images/path/userInfo.svg" />
             </view>

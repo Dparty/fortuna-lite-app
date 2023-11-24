@@ -1,0 +1,72 @@
+
+
+.content{
+  display: flex;
+  flex-direction: column; 
+  text-align: center; 
+  background-color: #3B243D; 
+  height: 100%; 
+  width: 100%;
+}
+
+/* 背景和header */
+.left-icon{
+  position: absolute;
+  color: white;
+  left: 40rpx;
+  top: 100rpx;
+}
+
+.left-icon image{
+  width: 20px;
+  height: 20px;
+}
+
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  margin: 160rpx 20rpx 50rpx 50rpx;
+  align-items: center;
+  width: 85%;
+}
+
+.header-text{
+  font-size: 50rpx;
+  color: white;
+}
+.info-wrapper{
+  flex: 1;
+  background-color:  #FFFBF2;
+  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20rpx 20rpx;
+}
+
+
+.info-bottom{
+  color: #ADA3AD;
+  text-align: left;
+  margin-left: 20rpx;
+}
+
+.info-item{
+  display: flex;
+  align-items: center;
+  padding: 50rpx 50rpx 0rpx 40rpx;
+}
+
+.info-item-title{
+  text-align: left;
+  font-size: 30rpx;
+  color: #746675;
+  margin-right: 40rpx;
+  width: 150rpx;
+}
+
+.info-item-value{
+  font-size: 30rpx;
+}

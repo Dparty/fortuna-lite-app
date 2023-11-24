@@ -91,7 +91,7 @@ Page({
   },
 
   _iconLeftTap: function(e) {
-    wx.switchTab({
+    wx.reLaunch({
       url: '../index/index'
     })
   },

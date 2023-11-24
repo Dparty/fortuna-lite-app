@@ -16,11 +16,14 @@ page{
 /* 背景和header */
 .left-icon{
   position: absolute;
-  font-size: 20px;
   color: white;
   left: 40rpx;
   top: 100rpx;
-  padding: 0 20rpx;
+}
+
+.left-icon image{
+  width: 20px;
+  height: 20px;
 }
 
 .navBg {
@@ -75,6 +78,7 @@ page{
   flex: 1;
   background-color:  #FFFBF2;
   border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .input-area{
@@ -225,8 +229,6 @@ page{
   /* height: 68rpx; */
   font-size: 32rpx;
 }
-
-
 
 /* 電話 */
 
@@ -474,10 +476,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 .tel_right .hint-active{
   margin: 0 0 70rpx 10rpx;
 }
-
-
-
-
 
 
 .svg_icon {

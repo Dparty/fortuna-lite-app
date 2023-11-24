@@ -7,7 +7,6 @@
     "pages/regist/index",
     "pages/account/index",
     "pages/findpassword/index"
-
   ],
   "window":{
     "backgroundTextStyle":"light",

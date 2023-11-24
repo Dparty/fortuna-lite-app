@@ -3,3 +3,15 @@ page{
   height: 100%;
 }
 
+.header{
+  display: flex;
+  justify-content: space-between;
+  margin: 160rpx 20rpx 50rpx 0rpx;
+  align-items: center;
+  width: 90%;
+}
+
+.header-text{
+  font-size: 50rpx;
+  color: white;
+}

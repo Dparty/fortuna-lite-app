@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "TransLg": "/component/transLg/transLg"
+  },
+  "navigationStyle": "custom"
+}

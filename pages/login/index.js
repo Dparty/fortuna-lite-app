@@ -8,15 +8,15 @@ const {
 
 Page({
   data: {
+    welcomeText: "请登录会员",
     getSmsCodeBtnTxt: "获取验证码",
     smsCodeDisabled: false,
     loginBtnTxt: "登录",
     loginBtnBgBgColor: "#F8D585",
     btnLoading: false,
     disabled: false,
-    inputUserName: '',
-    inputPassword: '',
-
+    selectedTabbarIdx: 1,
+    isTraditional: 'false',
     areaCodeArray: [{
         id: 86,
         name: '86',
@@ -54,11 +54,26 @@ Page({
         url: '../account/index'
       });
     }
+
+      // 配置tabbar
+      var tabbarData = getApp().globalData.tabbar;
+      var item_menu_selected = tabbarData[1];
+      var tabbarKey = item_menu_selected.title;
+      var selectedTabbarIdx = this.get_tabar_idx_from_name(tabbarData, tabbarKey);
+      this.setData({
+        dataForTabbar: tabbarData,
+        selectedTabbarKey: tabbarKey,
+        selectedTabbarIdx: selectedTabbarIdx,
+        scroll_top: 0,
+      });
+  
   },
   onReady: function () {},
   onShow: function () {
     // 页面显示
-
+    this.setData({
+      isTraditional: app.globalData.isTraditional || false
+    })
   },
   onHide: function () {
     // 页面隐藏
@@ -69,7 +84,45 @@ Page({
 
   },
 
+    // 点击tabbar item
+    onTabbarItemTap: function (res) {
+      console.log(res);
+      var tabItem = res.detail;
+      var dataForTabbar = this.data.dataForTabbar;
+      var idx = this.get_tabar_idx_from_name(dataForTabbar, tabItem.title);
+      if (tabItem.title.indexOf(this.data.selectedTabbarKey) != -1) { // 点击已经选中的tab，不做处理
+        return;
+      }
 
+      if(idx == 0){
+        wx.reLaunch({
+          url: '../index/index',
+        })
+      }
+
+      this.setData({
+        selectedTabbarKey: tabItem.title,
+        selectedTabbarIdx: idx,
+        scroll_top: 2,
+      });
+
+    },
+
+  // 根据名称获取tabbar的选中idx
+  get_tabar_idx_from_name: function (dataForTabbar, tabbar_name) {
+    try {
+      for (var i = 0; i < dataForTabbar.length; i++) {
+        var name = dataForTabbar[i].title;
+        if (name.indexOf(tabbar_name) != -1) {
+          return i;
+        }
+      }
+      return 0;
+
+    } catch (e) {
+      return 0;
+    }
+  },
   codeFocus: function (e) {
     this.setData({
       stCode: 1
@@ -242,15 +295,15 @@ Page({
             data: res.token
           });
 
-          wx.switchTab({
-            url: '../account/index'
+          wx.reLaunch({
+            url: '../index/index'
           })
         }
       } else {
         wx.showModal({
           title: '提示',
           showCancel: false,
-          content: '注册失败'
+          content: '登录失败'
         });
       }
 
@@ -263,87 +316,12 @@ Page({
   },
 
 
-  mysubmit: function (param) {
-    var flag = this.checkUserName(param) && this.checkPassword(param)
-    if (flag) {
-      this.setLoginData1();
-      this.checkUserInfo(param);
-    }
-  },
-  setLoginData1: function () {
+
+  trans: function (e) {
+    console.log("trans", e)
     this.setData({
-      loginBtnTxt: "登录中",
-      disabled: !this.data.disabled,
-      loginBtnBgBgColor: "#999",
-      btnLoading: !this.data.btnLoading
+      isTraditional: e.detail
     });
-  },
-  setLoginData2: function () {
-    this.setData({
-      loginBtnTxt: "登录",
-      disabled: !this.data.disabled,
-      loginBtnBgBgColor: "#ff9900",
-      btnLoading: !this.data.btnLoading
-    });
-  },
-  checkUserName: function (param) {
-    var email = util.regexConfig().email;
-    var phone = util.regexConfig().phone;
-    var inputUserName = param.username.trim();
-    if (email.test(inputUserName) || phone.test(inputUserName)) {
-      return true;
-    } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请输入正确的邮箱或者手机号码'
-      });
-      return false;
-    }
-  },
-  checkPassword: function (param) {
-    var userName = param.username.trim();
-    var password = param.password.trim();
-    if (password.length <= 0) {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请输入密码'
-      });
-      return false;
-    } else {
-      return true;
-    }
-  },
-  checkUserInfo: function (param) {
-    var username = param.username.trim();
-    var password = param.password.trim();
-    var that = this;
-    if ((username == 'admin@163.com' || username == '18500334462') && password == '000000') {
-      setTimeout(function () {
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 1500
-        });
-        that.setLoginData2();
-        that.redirectTo(param);
-      }, 2000);
-    } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '用户名或密码有误，请重新输入'
-      });
-      this.setLoginData2();
-    }
-  },
-  redirectTo: function (param) {
-    //需要将param转换为字符串
-    param = JSON.stringify(param);
-    wx.redirectTo({
-      url: '../main/index?param=' + param //参数只能是字符串形式，不能为json对象
-    })
   }
 
 })

@@ -38,6 +38,10 @@ page{
   text-align: center;
 }
 
+.info-content{
+  height: 100%;
+}
+
 .main-content{
   display: flex;
   flex-direction: column;
@@ -61,14 +65,14 @@ page{
 .header{
   display: flex;
   justify-content: space-between;
-  margin: 160rpx 20rpx 10rpx 20rpx;
-  width: 80%;
+  margin: 160rpx 20rpx 10rpx 10rpx;
+  align-items: center;
+  width: 85%;
 }
 
 .header-text{
   font-size: 50rpx;
   color: white;
-  
 }
 
 .avatar{

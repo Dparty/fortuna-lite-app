@@ -27,6 +27,9 @@ Page({
     inputUserName: '',
     inputPassword: '',
 
+    userInfo: {},
+    ifShowInfo: false,
+
     number: '',
     verificationCode: '',
     areaCode: '86',
@@ -40,53 +43,52 @@ Page({
     nameFlag: "visibility: hidden;",
     phoneFlag: "visibility: hidden;",
 
+    isTraditional: false,
+
   },
-  onLoad: async function (options) {
+  onLoad: function (options) {
     if(!wx.getStorageSync('token')){
       wx.redirectTo({
         url: '../login/index' //参数只能是字符串形式，不能为json对象
       });
       return;
     }
-
-    const that = this;
-    that.setData({
-      isTraditional: app.globalData.isTraditional || false
-    })
-    // 页面初始化 options为页面跳转所带来的参数
-    try {
-      const res = await API.getAccountInfo();
-      console.log(res)
-
-      this.setData({userName: res.name, userId: res.id});
-
-      drawQrcode({
-        width: 180,
-        height: 180,
-        canvasId: 'myQrcode',
-        // ctx: wx.createCanvasContext('myQrcode'),
-        text: this.data.userId,
-        // v1.0.0+版本支持在二维码上绘制图片
-        // image: {
-        //   imageResource: '../../images/icon.png',
-        //   dx: 70,
-        //   dy: 70,
-        //   dWidth: 60,
-        //   dHeight: 60
-        // }
-      })
-      
-    } catch (e) {
-
-    }
   },
   onReady: function () {
     // 页面渲染完成
    
   },
-  onShow: function () {
-    // 页面显示
+  onShow: async function () {
+    const userInfo = app.globalData.userInfo;
+    if(userInfo){
+      this.setData({userInfo: userInfo});
+      drawQrcode({
+        width: 180,
+        height: 180,
+        canvasId: 'myQrcode',
+        // ctx: wx.createCanvasContext('myQrcode'),
+        text: userInfo.id,
+      })
+    }
+    if(!wx.getStorageSync('token')){
+      wx.redirectTo({
+        url: '../login/index' //参数只能是字符串形式，不能为json对象
+      });
+      return;
+    }
+    this.setData({
+      isTraditional: app.globalData.isTraditional || false
+    })
+    
 
+    // try {
+    //   const res = await API.getAccountInfo();
+    //   console.log(res)
+
+    //   this.setData({userInfo: res, userName: res.name, userId: res.id});
+
+
+    // } catch (e) {}
   },
   onHide: function () {
     // 页面隐藏
@@ -99,24 +101,21 @@ Page({
 
 
   logout: function(){
-    console.log("logout and redirect");
     wx.setStorage({
       key: "token",
       data: ''
     });
-    wx.redirectTo({
-      url: '../login/index' //参数只能是字符串形式，不能为json对象
-    });
+    app.globalData.userInfo = null;
+
+    wx.reLaunch({
+      url: '../index/index' // 回到首页
+    })
   },
 
 
 
-  redirectTo: function (param) {
-    //需要将param转换为字符串
-    param = JSON.stringify(param);
-    wx.redirectTo({
-      url: '../main/index?param=' + param //参数只能是字符串形式，不能为json对象
-    })
+  showInfo: function () {
+    this.setData({ifShowInfo: true});
   },
 
   notfinsh: function () {
@@ -140,5 +139,26 @@ Page({
       isTraditional: app.globalData.isTraditional
     });
   },
+
+  trans: function (e) {
+    console.log("trans", e)
+    this.setData({
+      isTraditional: e.detail
+    });
+  },
+
+  returnToAccount: function (e) {
+    console.log("returnToAccount", e)
+    this.setData({
+      ifShowInfo: false
+    });
+    drawQrcode({
+      width: 180,
+      height: 180,
+      canvasId: 'myQrcode',
+      // ctx: wx.createCanvasContext('myQrcode'),
+      text: app.globalData.userInfo.id,
+    })
+  }
 
 })

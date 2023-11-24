@@ -3,7 +3,9 @@
 <view class="content">
   <image class="navBg" mode="widthFix" src="/images/background.png"></image>
   <view class="header-bg" style="background-image: url(/images/background.png);">
-    <view class='left-icon' bindtap='_iconLeftTap'>{{'<'}}</view>
+    <view class='left-icon' bindtap='_iconLeftTap'>
+      <image class="" src="../../images/return.png" />
+    </view>
     <view class="header">
       <view class="header-left">
         <view class="header-text">
@@ -146,10 +148,6 @@
       </view>
       <view class="btn-area">
         <button disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}" formType="submit" loading="{{btnLoading}}"> {{chs.convert(registBtnTxt)}} </button>
-        <view class="txt-area">
-          <!-- <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator> -->
-          <navigator redirect url="../login/index"><text class="register">登录账号</text></navigator>
-        </view>
       </view>
 
     </form>
