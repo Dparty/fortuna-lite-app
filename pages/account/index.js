@@ -6,10 +6,7 @@ const {
   API
 } = require('../../api/api.js');
 
-// 将 dist 目录下，weapp.qrcode.esm.js 复制到项目目录中
 import drawQrcode from '../../utils/weapp.qrcode.esm.js'
-
-
 
 
 Page({
@@ -45,6 +42,8 @@ Page({
 
     isTraditional: false,
 
+    renderHeight: 180,
+
   },
   onLoad: function (options) {
     if(!wx.getStorageSync('token')){
@@ -60,11 +59,15 @@ Page({
   },
   onShow: async function () {
     const userInfo = app.globalData.userInfo;
+    console.log(app.globalData.systeminfo.windowWidth / 2);
+    const renderHeight = app.globalData.systeminfo.windowWidth / 2;
+    this.setData({renderHeight: renderHeight});
+
     if(userInfo){
       this.setData({userInfo: userInfo});
       drawQrcode({
-        width: 180,
-        height: 180,
+        width: renderHeight,
+        height: renderHeight,
         canvasId: 'myQrcode',
         // ctx: wx.createCanvasContext('myQrcode'),
         text: userInfo.id,
@@ -141,7 +144,6 @@ Page({
   },
 
   trans: function (e) {
-    console.log("trans", e)
     this.setData({
       isTraditional: e.detail
     });
@@ -152,9 +154,10 @@ Page({
     this.setData({
       ifShowInfo: false
     });
+
     drawQrcode({
-      width: 180,
-      height: 180,
+      width: renderHeight,
+      height: renderHeight,
       canvasId: 'myQrcode',
       // ctx: wx.createCanvasContext('myQrcode'),
       text: app.globalData.userInfo.id,

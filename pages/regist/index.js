@@ -14,7 +14,8 @@ Page({
     btnLoading: false,
     registDisabled: false,
     smsCodeDisabled: false,
-
+    phonePH: '电话号码',
+    codePH: '验证码',
     inputUserName: '',
     inputPassword: '',
     phoneNum: '',
@@ -216,14 +217,9 @@ Page({
     this.setData({
       isTraditional: app.globalData.isTraditional
     });
-    this.configTitle();
+    this.transData();
   },
-  // 修改标题
-  configTitle() {
-    wx.setNavigationBarTitle({
-      title: convertChs.convert("笔记", app.globalData.isTraditional)
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -232,7 +228,7 @@ Page({
     that.setData({
       isTraditional: app.globalData.isTraditional || false
     })
-    that.configTitle()
+    this.transData();
   },
   /**
    * 生命周期函数--监听页面显示
@@ -397,24 +393,6 @@ Page({
     }
   },
 
-
-  // mysubmit: function (param) {
-  //   var flag = this.checkPhone(param.username) && this.checkPassword(param) && this.checkSmsCode(param)
-  //   var that = this;
-  //   if (flag) {
-  //     this.setregistData1();
-  //     setTimeout(function () {
-  //       wx.showToast({
-  //         title: '成功',
-  //         icon: 'success',
-  //         duration: 1500
-  //       });
-  //       that.setregistData2();
-  //       that.redirectTo(param);
-  //     }, 2000);
-  //   }
-  // },
-
   // phone number
   getPhoneNum: function (e) {
     this.setData({
@@ -493,6 +471,14 @@ Page({
     wx.redirectTo({
       url: '../main/index?param=' + param //参数只能是字符串形式，不能为json对象
     })
-  }
+  },
+
+  transData: function () {
+    
+    this.setData({
+      phonePH: convertChs.convert(this.data.phonePH, app.globalData.isTraditional),
+      codePH: convertChs.convert(this.data.codePH, app.globalData.isTraditional),
+    });
+  },
 
 })

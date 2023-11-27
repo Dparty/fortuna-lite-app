@@ -4,6 +4,7 @@ var app = getApp();
 const {
   API
 } = require('../../api/api.js');
+const convertChs = require('../../utils/simp_trad_chs.js');
 Page({
   data: {
     welcomeText: "欢迎加入澳门财神酒店会员 ！",
@@ -13,6 +14,21 @@ Page({
     registerBtnTxt: '立即加入',
     isTraditional: 'false',
     name: '',
+    list2: [{
+      id: 1,
+      label: "酒店介绍",
+      title: "酒店介绍",
+      subTitle: "财神酒店位于澳门最繁盛的新口岸区",
+      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/hotel-crop.jpg",
+      url: "../outer-hotel/intro",
+    }, {
+      id: 2,
+      label: "餐饮新品",
+      title: "餐饮新品",
+      subTitle: "由专业厨艺团队为您调理中西式佳肴美食",
+      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/menu-crop.jpg",
+      url: "../outer-menu/menu",
+    }]
   },
   //事件处理函数
   bindViewTap: function () {
@@ -31,11 +47,24 @@ Page({
     })
   },
 
+  getopendetail: function (e) {
+    const id = e.detail;
+    console.log(this.data.list2[id-1].url);
+    wx.navigateTo({
+      url: this.data.list2[id-1].url, //
+      success: function () {}, //成功后的回调；
+
+      fail: function () {}, //失败后的回调；
+      complete: function () {}
+    }) //结束后的
+  },
+
   trans: function (e) {
     console.log("trans", e)
     this.setData({
       isTraditional: e.detail
     });
+    this.transList();
   },
   onShow: async function () {
 
@@ -52,9 +81,22 @@ Page({
     // }
   },
 
+  transList: function () {
+    const newList2 = this.data.list2.map((item) => {
+      return {
+        ...item,
+        title: convertChs.convert(item.title, app.globalData.isTraditional),
+        subTitle: convertChs.convert(item.subTitle, app.globalData.isTraditional),
+      }
+    })
+    this.setData({
+      list2: newList2
+    });
+  },
+
   onLoad: async function () {
     console.log("index-onload")
-
+    this.transList();
     this.setData({
       isTraditional: app.globalData.isTraditional || false
     });

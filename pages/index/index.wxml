@@ -15,7 +15,12 @@
       <button class="nobg" disabled="{{disabled}}" style="background-color:{{loginBtnBgBgColor}}" bindtap='toLoginView'> {{chs.convert(loginBtnTxt)}} </button>
     </view>
 
+    <view class="article-area">
 
+      <card list="{{list2}}" bind:getopendetail="getopendetail"></card>
+
+
+    </view>
 
   </view>
 </view>
