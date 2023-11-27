@@ -1,5 +1,4 @@
 var util = require("../../utils/util.js");
-// 获取应用实例
 const app = getApp()
 const convertChs = require('../../utils/simp_trad_chs.js');
 const {
@@ -12,8 +11,6 @@ Page({
     registBtnTxt: "立即入会",
     registBtnBgBgColor: "#F8D585",
     getSmsCodeBtnTxt: "获取验证码",
-    // getSmsCodeBtnColor:"#ff9900",
-    // getSmsCodeBtnTime:60,
     btnLoading: false,
     registDisabled: false,
     smsCodeDisabled: false,
@@ -29,11 +26,11 @@ Page({
     birthday: util.getNowDate(new Date()),
     from: 'WECHAT',
     services: [],
+    agreeChecked: false,
     // 页面切换
     isToggled: false,
 
     // 日期筛选
-    currentDate: util.getNowDate(new Date()),
     minDate: new Date(1920, 1, 1).getTime(),
     maxDate: util.getNowDate(new Date()),
     radioChange: [{
@@ -50,20 +47,22 @@ Page({
     areaCodeArray: [{
         id: 86,
         name: '86',
-        label: '中国大陆 +86'
+        label: '中国大陆 +86',
+        value: '86',
       },
       {
         id: 853,
         name: '853',
         label: '澳门 +853',
+        value: '853',
       },
       {
         id: 852,
         name: '852',
         label: '香港 +852',
+        value: '852',
       },
     ],
-    currentChoose: 0,
 
     // 复选框
     checkBoxList: [{
@@ -78,28 +77,70 @@ Page({
       },
     ],
     services: [],
+
+    // 提示样式相关
     stUserName: 0,
+    stCode: 0,
+    stNumber: 0,
+
+    // 错误
+    nameFlag: "visibility: hidden;",
+    phoneFlag: "visibility: hidden;",
+    codeFlag: "visibility: hidden;",
+    genderFlag: "visibility: hidden;"
   },
 
-
+  _iconLeftTap: function(e) {
+    wx.reLaunch({
+      url: '../index/index'
+    })
+  },
   /* 文本框聚焦时更改状态*/
   userNameFocus: function (e) {
-    console.log(e)
     this.setData({
       stUserName: 1
     })
   },
   /* 文本框失焦时更改状态*/
   userNameBlur: function (e) {
+    if (!e.detail.value) {
+      this.setData({
+        stUserName: 0
+      })
+    }
+  },
 
+  codeFocus: function (e) {
     this.setData({
-      stUserName: 0
+      stCode: 1
     })
+  },
+  /* 文本框失焦时更改状态*/
+  codeBlur: function (e) {
+    if (!e.detail.value) {
+      this.setData({
+        stCode: 0
+      })
+    }
+  },
+
+  numberFocus: function (e) {
+    this.setData({
+      stNumber: 1
+    })
+  },
+  /* 文本框失焦时更改状态*/
+  numberBlur: function (e) {
+    if (!e.detail.value) {
+      this.setData({
+        stNumber: 0
+      })
+    }
   },
 
   bindPickerChange: function (e) {
     this.setData({
-      areaCode: this.data.areaCodeArray[e.detail.value].id
+      areaCode: this.data.areaCodeArray[e.detail.value].value
     })
   },
 
@@ -111,7 +152,11 @@ Page({
     })
   },
   radioChange: function (e) {
-    console.log('value值为：', e.detail.value);
+    if(e.detail.value){
+      this.setData({
+        genderFlag: "visibility: hidden;"
+      })
+    }
     this.setData({
       gender: e.detail.value
     })
@@ -119,9 +164,19 @@ Page({
 
 
   bindUserNameChange: function (e) {
-    this.setData({
-      username: e.detail.value
-    })
+    const value = e.detail.value;
+    if (!value) {
+      this.setData({
+        username: value,
+        nameFlag: ""
+      });
+    } else {
+      this.setData({
+        username: value,
+        nameFlag: "visibility: hidden;"
+      });
+    }
+
   },
 
   bindDateChange: function (e) {
@@ -130,6 +185,13 @@ Page({
       birthday: e.detail.value
     })
   },
+
+  checkboxChange: function (e) {
+    this.setData({
+      agreeChecked: !this.data.agreeChecked
+    })
+  },
+
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
 
@@ -212,8 +274,51 @@ Page({
     this.triggerEvent("mySelectItem", selectItem) //组件选中回调
   },
 
+  validateForm: function () {
+    var valid = true;
+    if (!this.data.username) {
+      this.setData({
+        nameFlag: ''
+      });
+      valid = false;
+    }
+
+    if (!this.data.gender) {
+      this.setData({
+        genderFlag: ''
+      });
+      valid = false;
+    }
+
+    if (!this.checkPhone(this.data.number)) {
+      this.setData({
+        phoneFlag: ''
+      });
+      valid = false;
+    }
+
+    if (!this.data.verificationCode) {
+      this.setData({
+        codeFlag: ''
+      });
+      valid = false;
+    }
+
+    if (!this.data.agreeChecked) {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '请勾选用户协议'
+      });
+      valid = false;
+
+    }
+
+    return valid;
+  },
+
   formSubmit: async function (e) {
-    var param = e.detail.value;
+    if (!this.validateForm()) return;
 
     const data = {
       phoneNumber: {
@@ -229,25 +334,69 @@ Page({
       birthday: Date.parse(new Date(this.data.birthday))
     };
 
-    console.log(data);
+    try {
+      const res = await API.register(data);
 
-    const res = await API.register(data);
+      if(res){
 
-    console.log(res);
+        // account exists
+        if(res.code === '40009'){
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '用户已存在，请直接登录',
+            success:function(res) {
+              if (res.confirm) {
+                wx.redirectTo({
+                  url: '../login/index'
+                })} 
+            }
+          });
+        }else if(res.code === '40006'){
+          // verification fault
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '验证码错误',
+          });
+        }
+        
+        else{
 
-    wx.setStorage({
-      key: "token",
-      data: res.token
-    });
+          wx.redirectTo({
+            url: '../login/index'
+          })
+        }
 
-    // this.mysubmit(param);
+      }else{
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '注册失败'
+          });
+      }
+    } catch (e) {
+
+    }
+
+
   },
 
   verificationCodeChange: function (e) {
-    this.setData({
-      verificationCode: e.detail.value
-    })
+    const value = e.detail.value;
+    if (!value) {
+      this.setData({
+        verificationCode: e.detail.value,
+        codeFlag: ""
+      });
+    } else {
+      this.setData({
+        verificationCode: e.detail.value,
+        codeFlag: "visibility: hidden;"
+      });
+    }
   },
+
 
   // mysubmit: function (param) {
   //   var flag = this.checkPhone(param.username) && this.checkPassword(param) && this.checkSmsCode(param)
@@ -268,9 +417,9 @@ Page({
 
   // phone number
   getPhoneNum: function (e) {
-    const number = e.detail.value;
     this.setData({
-      number
+      number: e.detail.value,
+      phoneFlag: "visibility: hidden;",
     })
   },
 
@@ -297,35 +446,13 @@ Page({
     if (phone.test(inputNumber)) {
       return true;
     } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请输入正确的手机号码'
+      this.setData({
+        phoneFlag: ""
       });
       return false;
     }
   },
-  // checkPassword:function(param){
-  //   var userName = param.username.trim();
-  //   var password = param.password.trim();
-  //   if(password.length<=0){
-  //     wx.showModal({
-  //       title: '提示',
-  //       showCancel:false,
-  //       content: '请设置密码'
-  //     });
-  //     return false;
-  //   }else if(password.length<6||password.length>20){
-  //     wx.showModal({
-  //       title: '提示',
-  //       showCancel:false,
-  //       content: '密码长度为6-20位字符'
-  //     });
-  //     return false;
-  //   }else{
-  //     return true;
-  //   }
-  // },
+
   getSmsCode: async function () {
     var number = this.data.number;
     var that = this;
@@ -335,15 +462,14 @@ Page({
         if (count > 0) {
           count--;
           that.setData({
-            getSmsCodeBtnTxt: count + ' s',
-            getSmsCodeBtnColor: "#999",
+            getSmsCodeBtnTxt: count + ' s 后重试',
+            // getSmsCodeBtnColor: "#999",
             smsCodeDisabled: true
           });
 
         } else {
           that.setData({
             getSmsCodeBtnTxt: "获取验证码",
-            // getSmsCodeBtnColor:"#ff9900",
             smsCodeDisabled: false
           });
           count = 60;
@@ -361,20 +487,6 @@ Page({
     }
 
   },
-  // checkSmsCode: function (param) {
-  //   var smsCode = param.smsCode.trim();
-  //   var tempSmsCode = '000000'; //演示效果临时变量，正式开发需要通过wx.request获取
-  //   if (smsCode != tempSmsCode) {
-  //     wx.showModal({
-  //       title: '提示',
-  //       showCancel: false,
-  //       content: '请输入正确的短信验证码'
-  //     });
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // },
   redirectTo: function (param) {
     //需要将param转换为字符串
     param = JSON.stringify(param);

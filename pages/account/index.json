@@ -1,15 +1,13 @@
 {
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "登录",
+  "navigationBarTitleText": "会员页",
   "backgroundColor": "#fff",
   "backgroundTextStyle": "light",
   "navigationStyle": "custom",
   "usingComponents": {
     "TransLg": "/component/transLg/transLg",
-    "tabbar": "../../component/tabbar/tabbar"
-  },
-
-  "enablePullDownRefresh": true
+    "Info": "/component/info/index"
+  }
 
 }

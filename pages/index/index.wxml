@@ -1,10 +1,21 @@
+<wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+
 <!--index.wxml-->
-<view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-  </view>
-  <view class="usermotto">
-    <button type="primary" bindtap='toLoginView' class="user-motto">{{motto}}</button>
+<view class="content">
+  <view class="main-container">
+    <view class="header">
+      <text class="header-text">{{chs.convert(welcomeText)}}{{chs.convert(name)}}</text>
+
+      <TransLg isTraditional="{{isTraditional}}" bind:trans='trans'></TransLg>
+    </view>
+
+    <view class="btn-area">
+      <button disabled="{{disabled}}" style="background-color:{{registerBtnBgBgColor}}" bindtap='toRegisterView'> {{chs.convert(registerBtnTxt)}} </button>
+
+      <button class="nobg" disabled="{{disabled}}" style="background-color:{{loginBtnBgBgColor}}" bindtap='toLoginView'> {{chs.convert(loginBtnTxt)}} </button>
+    </view>
+
+
+
   </view>
 </view>

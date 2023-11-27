@@ -1,21 +1,65 @@
+<wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+
 <view class="content">
-    <view class = "logo">
-        <image mode="aspectFit" src="/images/logo.png"></image>
-    </view>
+  <view class="header">
+    <text class="header-text">{{chs.convert(welcomeText)}}</text>
+
+    <TransLg isTraditional="{{isTraditional}}" bind:trans='trans'></TransLg>
+  </view>
+
+  <view class="form-wrapper">
     <form bindsubmit="formSubmit">
-        <view class="input-area">
-          <input id="username" name="username" maxlength='40' type="text" placeholder="邮箱/手机号" />
-          <input id="password" name="password" maxlength='20' type="password" placeholder="密码" />
-        </view>
-        <view class="btn-area">
-            <button  disabled="{{disabled}}" style="background-color:{{loginBtnBgBgColor}}"   formType="submit"  loading="{{btnLoading}}"> {{loginBtnTxt}} </button>
-            <view class="txt-area">
-                <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator>
-                <navigator redirect url="../regist/index"><text class="register">注册账号</text></navigator> 
+      <view class="input-area">
+        <view class="phone-wrapper">
+          <view class="commeon_css tel_input">
+            <view class="tel_left" bindtap="choosePhoneCode">
+              <view class="svg_icon">
+                <image class="svg_icon-inner" src="../../images/path/phoneIcon.svg" />
+              </view>
+              <text class="areaCode-top">区号</text>
+              <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
+                <view class="picker">
+                  +{{areaCode}}{{areaCodeArray[index].id}}
+                </view>
+
+              </picker>
+              <view class="arrow_down"></view>
             </view>
+
+            <view class="tel_right">
+              <text class="{{stNumber==0 ? 'hint':'hint-active'}}">{{chs.convert('电话号码')}}</text>
+              <input class="input" placeholder="{{chs.convert('电话号码')}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" placeholder-class="{{stNumber==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="numberFocus" bindblur='numberBlur' />
+
+              <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
+            </view>
+          </view>
+          <view style='{{phoneFlag}}' class="error-msg">{{chs.convert('电话号码格式错误')}}</view>
+
         </view>
+        <view class="smsCode-wrapper">
+          <view class="smsCode">
+            <text class="{{stCode==0 ? 'hint':'hint-active'}}">{{chs.convert('验证码')}}</text>
+            <view class="svg_icon">
+              <image class="svg_icon-inner" src="../../images/path/codeIcon.svg" />
+            </view>
+            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="验证码" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
+          </view>
+          <view style='{{codeFlag}}' class="error-msg">{{chs.convert('验证码不能为空')}}</view>
+        </view>
+
+
+      </view>
+      <view class="btn-area">
+        <button disabled="{{disabled}}" style="background-color:{{loginBtnBgBgColor}}" formType="submit" loading="{{btnLoading}}"> {{chs.convert(loginBtnTxt)}} </button>
+        <view class="txt-area">
+          <navigator redirect url="../findpassword/index"><text class="forgot-password">忘记密码？</text></navigator>
+          <navigator redirect url="../regist/index"><text class="register">注册账号</text></navigator>
+        </view>
+      </view>
     </form>
 
     <!--<progress class="myprogress" percent="{{percent }}" color="{{color}}" active/>-->
-    
+  </view>
+  <!--tabbar  -->
+  <tabbar dataForTabbar='{{dataForTabbar}}' selectedTabbarIdx='{{selectedTabbarIdx}}' bindonTabbarItemTap='onTabbarItemTap'></tabbar>
 </view>

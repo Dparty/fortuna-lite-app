@@ -1,8 +1,7 @@
-@import "../login/index.wxss";
-.smsCode{display: flex;justify-content:space-between;border-bottom: 1px solid #ddd;padding-right: 10%}
-.smsCode input{width: 336rpx;}
-.smsCode .getSmsCodeBtn{font-size: 30rpx; color:#3B243D;width:216rpx;box-sizing: border-box; height: 80rpx;line-height: 80rpx;margin-top: 10rpx;margin-right: 0}
-
+/* @import "../login/index.wxss"; */
+page{
+  height: 100%;
+}
 
 .content{
   display: flex;
@@ -11,6 +10,20 @@
   background-color: #3B243D; 
   height: 100%; 
   width: 100%;
+}
+
+
+/* 背景和header */
+.left-icon{
+  position: absolute;
+  color: white;
+  left: 40rpx;
+  top: 100rpx;
+}
+
+.left-icon image{
+  width: 20px;
+  height: 20px;
 }
 
 .navBg {
@@ -28,7 +41,7 @@
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding-top: 40rpx;
+  padding-top: 30rpx;
   padding-bottom: 0rpx; 
 }
 
@@ -40,7 +53,6 @@
 .header-left{
   display: flex;
   flex-direction: column;
-  
 }
 
 .header-text{
@@ -60,30 +72,89 @@
 }
 
 
+/* 表單基本樣式 */
+
 .form-wrapper{
-  /* height: 100%; */
   flex: 1;
   background-color:  #FFFBF2;
-  border: 1px solid black;
   border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 .input-area{
   text-align: left;
-  padding: 40rpx 50rpx 0rpx 40rpx;
-}
-.input-area input{height:100rpx;line-height: 100rpx;}
-
-.btn-area button{
-  background-color: #F8D585;
-  margin-top: 40rpx;
-  color: #331735;
+  padding: 50rpx 50rpx 0rpx 40rpx;
   font-size: 30rpx;
-  padding: 10rpx;
-  font-weight: bold;
+  color: #ADA3AD; 
 }
+.input-area input{
+  /* height:100rpx;
+  line-height: 100rpx; */
+  color: black;
+}
+
+.error-msg{
+  font-size: 25rpx;
+  color: red;
+  margin-top: 10rpx;
+}
+
+/* 驗證碼 */
+.smsCode-wrapper{
+  margin-bottom: 20rpx;
+}
+
+.smsCode{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+.smsCode input{
+  /* width: 336rpx; */
+  font-size: 30rpx;
+}
+
+.smsCode image{
+  height: 38rpx;
+  width: 38rpx;
+  align-self: center;
+
+}
+
+.getSmsCodeBtn{
+  font-size: 30rpx; 
+  color:#3B243D;
+  /* width: 250rpx; */
+  /* box-sizing: border-box;  */
+  height: 80rpx;
+  /* line-height: 80rpx; */
+  margin-top: 10rpx;
+  background: none !important;
+  color:  #613665 !important;
+  font-size: 25rpx;
+}
+
+.tel_input button::after{ border: none; } 
+
+
+
+
+
+
+
+
 
 .birthBox{
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+  border-bottom:1px solid #ddd;
+  padding-right: 40rpx;
+  margin-bottom: 25rpx;
+} 
+ 
+.birthBox-left{
   display: flex;
   align-items: center;
 }
@@ -91,6 +162,7 @@
 .birthBox label{
   color: #ADA3AD;
   margin-right: 50rpx;
+  margin-left: 10rpx;
 }
 
 
@@ -99,24 +171,24 @@
   align-items: center;
 }
 
+.usertype-checkbox checkbox-group{
+  color: black;
+}
+
+.usertype-checkbox-left{
+  display: flex;
+  align-items: center;
+}
 
 
 
 
 /* 繁简切换 */
 .traditional {
-  /* background: #D1D1D1; */
-  /* border: 1rpx solid #E5E5E5; */
-  /* border-radius: 100rpx; */
-  /* height: 68rpx; */
   width: 220rpx;
   font-size: 24rpx;
   display: flex;
   flex-direction: row;
-  /* position: fixed; */
-  /* bottom: 500rpx; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
 }
 
 .traditional{
@@ -158,79 +230,135 @@
   font-size: 32rpx;
 }
 
+/* 電話 */
 
-
-
+/* 區號旁邊的向下空心箭頭 */
 .arrow_down {
   position: relative;
   left: 10rpx;
-  top: 20rpx;
+  top: 5rpx;
   width: 0;
   height: 0;
   overflow: hidden;
-  border-width: 10rpx;
+  /* border-width: 10rpx;
   border-color: #3B243D transparent transparent transparent;
-  border-style: dotted dotted solid dotted;
-}
-.input {
-  font-size: 30rpx;
+  border-style: dotted dotted solid dotted; */
+  width: 10rpx;
+  height: 10rpx;
+  transform: rotate(45deg);
+  border-bottom: 1px solid #3B243D;
+  border-right: 1px solid #3B243D;
 }
 
-.commeon_css{
+.phone-wrapper{
+  margin-bottom: 20rpx;
+}
+
+.tel_input{
   display: flex;
   height: 80rpx;
   /* width: 100%; */
   align-items: center;
   flex-direction: row;
-  /* padding: 84rpx 0rpx 30rpx 0rpx; */
-  border-bottom: 2rpx solid #F2F2F2;
+  /* border-bottom:1px solid #ddd; */
 }
 
-.code_input .get_code {
+.tel_input image{
+  height: 32rpx;
+  width: 32rpx;
+  align-self: center;
+}
+
+.tel_input .picker{
+  margin-top: 20rpx;
+}
+
+.areaCode-top{
+  position: absolute;
+  font-size: 12px;
+  /* background: white; */
+  margin: 0 0 70rpx 75rpx;
+  color: #ADA3AD;
+}
+
+.tel_right{
+  display: flex;
+  align-items: center;
+  margin-left: 20rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+/* .code_input .get_code {
   display: flex;
   justify-content: space-between;
-}
+} */
 .get_code .code_txt {
-  font-size: 28rpx;
+  /* font-size: 28rpx; */
 }
 
 .tel_left{
   display: flex;
-  min-width: 15%;
+  /* min-width: 15%; */
+  align-items: center;
   margin-right: 25rpx; 
+  color: black;
+
 }
 
-/* 单选 */
+
+/* 性別单选框 */
+
+.gender-select-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin: 0 50rpx 0 0;
+  margin-bottom: 30rpx;
+}
 
 .gender-select{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 50rpx 0 0;
 }
+
+.gender-select-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gender-select-left label{
+  margin-left: 10rpx;
+}
+
+.gender-select-left image {
+  height: 42rpx;
+  width: 42rpx;
+  align-self: center;
+}
+
+
+
 .option-list {
-  /* background: white; */
-  /* padding: 0 40rpx; */
   height: 100rpx;
   display: flex;
-  /* align-items: flex-end; */
-  /* justify-content: space-between; */
-  border-bottom: 1px solid #efefef;
+}
+
+.option-list text, .birthBox .picker{
+  color: black;
 }
 
 .radio-group {
   width: 100%;
   height: 100rpx;
   display: flex;
-  /* align-items: flex-end; */
-  /* justify-content: space-between; */
 }
 
 .radio-group .radio {
   height: 100rpx;
   display: flex;
   align-items: center;
-  margin-right: 30rpx;
+  margin-left: 25rpx;
 }
 
 .radio-group .radio text {
@@ -241,8 +369,11 @@ radio {
   transform: scale(0.6);
 }
 
-/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+radio .wx-radio-input{
+  border-color: #3B243D  !important;
+}
 
+/* 选中后的 背景样式  */
 radio .wx-radio-input.wx-radio-input-checked {
   /* border: none; */
   border-color: #3B243D  !important;
@@ -253,8 +384,7 @@ radio .wx-radio-input.wx-radio-input-checked {
   */
 }
 
-/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
-
+/* 选中后的 对勾样式 */
 radio .wx-radio-input.wx-radio-input-checked::before {
   /* 去除对号 */
   content: '';
@@ -262,19 +392,19 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   width: 36rpx;
   height: 36rpx;
   border-radius: 50%;
-  /* background: red; */
   background-color: #3B243D ;
-  /* 居中 *//* margin-top: 0rpx; *//* display: flex; *//* position: relative; */
 }
 
 
 
-/* 复选 */
+/*  用戶類型復選框 */
 
 .usertype-checkbox{
   font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
 }
-checkbox-group {
+.usertype-checkbox checkbox-group {
   height: 100rpx;
   display: flex;
   align-items: center;
@@ -296,9 +426,17 @@ checkbox {
   transform: scale(0.6);
   align-self: center;
 }
+
+checkbox .wx-checkbox-input{
+  padding: 0;
+  border-color: #3B243D !important;
+}
+
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   /* 改变对号颜色 */
-  /* color: #3B243D ; */
+  color: white ;
+  background-color: #3B243D !important;
+  border-color: #3B243D !important;
   font-weight: 700;
 }
 
@@ -313,26 +451,118 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 
 
-.username{
+.hint{
   display: none;
   color: #ADA3AD;
 }
 
-.ph-username{
+.ph-hint{
   display: block;
   color: #ADA3AD;
+  margin-top: -10rpx;
 }
-.ph-username-active{
+.ph-hint-active{
   display: none;
 }
 
-.username-active{
+.hint-active{
   position: absolute;
   font-size: 12px;
   /* background: white; */
-  margin: 0 0 20px 0;
-
+  margin: 0 0 70rpx 75rpx;
   color: #ADA3AD;
 }
 
+.tel_right .hint-active{
+  margin: 0 0 70rpx 10rpx;
+}
 
+
+.svg_icon {
+  display: inline-flex;
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  color: #ADA3AD;
+  margin-bottom: 10rpx;
+}
+
+.svg_icon-inner {
+  width: 2em;
+  height: 2em;
+  transform: translateY(-2em);
+  filter: drop-shadow(0 2em 0 currentColor);
+}
+
+.input-name-wrapper{
+  /* margin-bottom: 20rpx; */
+}
+
+.input-name-wrapper-main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom:1px solid #ddd;
+}
+
+.input-name-wrapper image, .usertype-checkbox image {
+  height: 42rpx;
+  width: 42rpx;
+  align-self: center;
+}
+
+
+.input-name-wrapper input, .smsCode input, .tel_input input{
+  flex: 1;
+  font-size: 30rpx;
+  margin-left: 10rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  /* padding-bottom: 20rpx; */
+}
+
+
+
+.birthBox-left image{
+  height: 40rpx;
+  width: 40rpx;
+  align-self: center;
+}
+
+
+.btn-area{width: 90%;margin: 0 auto}
+.btn-area button{
+  background-color: #F8D585;
+  margin-top: 10rpx;
+  color: #331735;
+  font-size: 30rpx;
+  padding: 5rpx;
+  font-weight: bold;
+}
+
+.txt-area{
+  margin-top: 30rpx;
+  display: flex;
+  justify-content:space-between;
+  font-size: 30rpx
+}
+
+
+/* 底部隱私協議 */
+.agreement-checkbox{
+  font-size: 22rpx;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.agreement-checkbox label{
+  display: flex;
+  align-items: center;
+}
+
+.agreement-checkbox text{
+  font-size: 22rpx !important;
+  color:  #613665;
+}

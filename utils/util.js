@@ -42,7 +42,6 @@ function promisic (func) {
           func(args);
       })
   }
-  
 }
 
 const getNowDate = date => {
