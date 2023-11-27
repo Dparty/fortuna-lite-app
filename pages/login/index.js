@@ -17,6 +17,8 @@ Page({
     disabled: false,
     selectedTabbarIdx: 1,
     isTraditional: 'false',
+    phonePH: '电话号码',
+    codePH: '验证码',
     areaCodeArray: [{
         id: 86,
         name: '86',
@@ -73,7 +75,8 @@ Page({
     // 页面显示
     this.setData({
       isTraditional: app.globalData.isTraditional || false
-    })
+    });
+    this.transData();
   },
   onHide: function () {
     // 页面隐藏
@@ -307,21 +310,26 @@ Page({
         });
       }
 
-
-
     } catch (e) {
 
     }
 
   },
 
-
-
   trans: function (e) {
     console.log("trans", e)
     this.setData({
       isTraditional: e.detail
     });
-  }
+    this.transData();
+  },
+
+  transData: function () {
+    
+    this.setData({
+      phonePH: convertChs.convert(this.data.phonePH, app.globalData.isTraditional),
+      codePH: convertChs.convert(this.data.codePH, app.globalData.isTraditional),
+    });
+  },
 
 })

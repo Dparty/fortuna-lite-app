@@ -1,0 +1,98 @@
+.card {
+  padding-top: 60rpx;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+
+ .card .card-title {
+  font-size: 40rpx;
+  color: #2d2d2d;
+  font-weight: 700;
+  padding: 0 30rpx;
+  text-align: left;
+}
+.card .card-subtitle {
+  font-size: 28rpx;
+  color: #999;
+  line-height: 60rpx;
+  text-align: left;
+  height: 60rpx;
+  padding: 0 30rpx;
+}
+.card .icon-jiantouyou-xian {
+  background: #f5f5f5;
+  position: absolute;
+  top: 57px;
+  right: 15px;
+  width: 24px;
+  height: 24px;
+  color: #b2aeae;
+  font-size: 14px;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 12px;
+}
+
+
+.card .card-items {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  /* padding-left: 10rpx; */
+}
+ .card .card-items .card-item {
+  /* vertical-align: top; */
+  /* width: 320rpx;
+  height: 380rpx; */
+  margin-bottom: 20rpx;
+  background: #3B243D; 
+  color: white;
+  border: 0 solid #f5f5f5;
+  /* box-shadow: 0 4rpx 40rpx 0 rgba(0,0,0,.1); */
+  /* border-radius: 35rpx; */
+  overflow: hidden;
+}
+.card .card-items .card-item image {
+  width: 100%;
+  height: 450rpx;
+  border-radius: 50rpx;
+}
+
+.card-image{
+  border: 0 solid #f5f5f5;
+  border-radius: 50rpx 0 0 50rpx;
+}
+
+
+.item-content{
+  display: flex;
+  flex-direction: column;
+  margin: 20rpx 0;
+}
+
+
+.card .card-items .card-name {
+  font-size: 35rpx;
+  padding: 10rpx 20rpx;
+  white-space: pre-line;
+  font-weight: 500;
+  text-align: left;
+}
+
+.card .card-items .card-name-sub {
+  text-align: left;
+  font-size: 26rpx;
+  padding: 10rpx 20rpx;
+  white-space: pre-line;
+}
+
+.card .card-items .card-info {
+  font-size: 20rpx;
+  color: #666;
+  padding: 0 20rpx;
+  text-align: left;
+  line-height: 40rpx;
+}

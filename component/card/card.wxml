@@ -1,0 +1,19 @@
+<view class="card">
+<view>
+    <!-- <view class="card-title">{{name}}</view>
+    <view class="card-subtitle">{{title}}</view> <span class="iconfont icon-jiantouyou-xian" style="top:36px;"></span> -->
+</view>
+  <view class="card-items">
+    <scroll-view scroll-y="true" style=" white-space: nowrap; display: flex">
+      <view wx:for="{{list}}" class="card-item" wx:key="index" bindtap="getopendetail" data-id="{{item.id}}">
+      <view class="card-image">
+        <image src="{{item.img}}"  mode="aspectFill" />
+      </view>
+        <view class="item-content"> 
+        <view class="card-name">{{item.title}}</view>
+        <view class="card-name-sub">{{item.subTitle}}</view>
+      </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

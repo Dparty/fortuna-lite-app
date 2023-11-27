@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "TransLg": "/component/transLg/transLg"
+    "TransLg": "/component/transLg/transLg",
+    "card": "/component/card/card"
   },
   "navigationStyle": "custom"
 }

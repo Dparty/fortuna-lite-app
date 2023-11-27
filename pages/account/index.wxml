@@ -12,12 +12,13 @@
   </view>
 
   <view class="wrapper">
-    <image src="/images/logo_gd.png" class='avatar'></image>
+    <image src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/logo_gd.png" class='avatar'></image>
 
     <view class="main-content">
       <text class="main-content-title"> {{chs.convert(title)}} </text>
       <!-- <view> {{userName}} </view>
     <view>{{userId}}</view> -->
+
 
       <canvas class="main-content-canvas" canvas-id="myQrcode"></canvas>
 

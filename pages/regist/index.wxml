@@ -1,8 +1,8 @@
 <wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
 
 <view class="content">
-  <image class="navBg" mode="widthFix" src="/images/background.png"></image>
-  <view class="header-bg" style="background-image: url(/images/background.png);">
+  <image class="navBg" mode="widthFix" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/background.png"></image>
+  <view class="header-bg" style="background-image: url('https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/background.png');">
     <view class='left-icon' bindtap='_iconLeftTap'>
       <image class="" src="../../images/return.png" />
     </view>
@@ -24,7 +24,7 @@
         </view>
       </view>
       <view class="logo">
-        <image mode="aspectFit" src="/images/logo_withbg1.png"></image>
+        <image mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/logo_withbg.png"></image>
       </view>
     </view>
   </view>
@@ -87,7 +87,7 @@
               <view class="svg_icon">
                 <image class="svg_icon-inner" src="../../images/path/phoneIcon.svg" />
               </view>
-              <text class="areaCode-top">区号</text>
+              <text class="areaCode-top">{{chs.convert('区号')}}</text>
               <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
                 <view class="picker">
                   +{{areaCode}}{{areaCodeArray[index].id}}
@@ -98,8 +98,8 @@
             </view>
 
             <view class="tel_right">
-              <text class="{{stNumber==0 ? 'hint':'hint-active'}}">{{chs.convert('电话号码')}}</text>
-              <input class="input" placeholder="{{chs.convert('电话号码')}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" placeholder-class="{{stNumber==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="numberFocus" bindblur='numberBlur' />
+              <text class="{{stNumber==0 ? 'hint':'hint-active'}}">{{phonePH}}</text>
+              <input class="input" placeholder="{{phonePH}}" type="number" maxlength="11" value="{{number}}" bindinput="getPhoneNum" placeholder-class="{{stNumber==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="numberFocus" bindblur='numberBlur' />
 
               <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
             </view>
@@ -110,11 +110,11 @@
 
         <view class="smsCode-wrapper">
           <view class="smsCode">
-            <text class="{{stCode==0 ? 'hint':'hint-active'}}">验证码</text>
+            <text class="{{stCode==0 ? 'hint':'hint-active'}}">{{codePH}}</text>
             <view class="svg_icon">
               <image class="svg_icon-inner" src="../../images/path/codeIcon.svg" />
             </view>
-            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="验证码" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
+            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="{{codePH}}" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
           </view>
           <view style='{{codeFlag}}' class="error-msg">{{chs.convert('验证码不能为空')}}</view>
         </view>
@@ -137,9 +137,9 @@
         <view class="agreement-checkbox">
           <checkbox-group bindchange="checkboxChange">
             <label class="checkbox">
-              <checkbox value="agree" checked="{{agreeChecked}}" />本人已阅读并同意
-              <text bindtap="agreement1">《隐私政策》</text>
-              及<text bindtap="agreement2">《用户协议》</text>
+              <checkbox value="agree" checked="{{agreeChecked}}" />{{chs.convert('本人已阅读并同意')}}
+              <text bindtap="agreement1">{{chs.convert('《隐私政策》')}}</text>
+              及<text bindtap="agreement2">{{chs.convert('《用户协议》')}}</text>
             </label>
           </checkbox-group>
         </view>
