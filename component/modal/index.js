@@ -1,105 +1,77 @@
+// components/dialog/index.js
 Component({
-  properties: {},
+  options: {
+    /**
+        styleIsolation 选项从基础库版本 2.6.5 开始支持。它支持以下取值：
+            isolated 表示启用样式隔离，在自定义组件内外，使用 class 指定的样式将不会相互影响（一般情况下的默认值）；
+            apply-shared 表示页面 wxss 样式将影响到自定义组件，但自定义组件 wxss 中指定的样式不会影响页面；
+            shared 表示页面 wxss 样式将影响到自定义组件，自定义组件 wxss 中指定的样式也会影响页面和其他设置了 apply-shared 或 shared 的自定义组件。（这个选项在插件中不可用。）
+     */
+    styleIsolation: 'isolated'
+  },
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+    cancelButtonText: {
+      type: String,
+      value: '取消'
+    },
+    confirmButtonText: {
+      type: String,
+      value: '确定'
+    },
+    message: {
+      type: String,
+      value: ''
+    },
+    show: {
+      type: Boolean,
+      value: false,
+    },
+    confirmCallback: null,
+    cancelCallback: null,
+  },
+  /**
+   * 组件的初始数据
+   */
   data: {
-    showModal: false,
-    maskAnimate: false,
-    title: '',
-    content: '',
-    tip: '',
-    prompt: false, //是否有输入框
-    confirmType: '',
-    showCancel: true,
-    cancelText: '取消',
-    confirmText: '确定',
-    shadeClose: false,
-    confirm() {},
-    cancel() {},
-    detail: {
-      inputVal: '',
-    },
+    windowWidth: 0,
+    windowHeight: 0,
   },
-  methods: {
-    // 外部方法调用
-    showModal(params) {
-      this.setData(
-        {
-          showModal: true,
-          title: params.title || '', //title
-          content: params.content || '', //中间内容
-          tip: params.tip || '', //灰色提示
-          prompt: params.prompt || false, //是否有输入框
-          confirmType: params.confirmType || '', //是否有底下按钮
-          showCancel: params.showCancel == undefined ? true : params.showCancel, //是否显示取消
-          cancelText: params.cancelText || '取消', //左侧按钮文字
-          confirmText: params.confirmText || '确定', //右侧按钮文字
-          shadeClose: params.shadeClose || false, //是否允许点击遮罩关闭弹窗
-          /* 回调函数 */
-          confirm: params.confirm || function () {}, //点击确认
-          cancel: params.cancel || function () {}, //点击取消
-        },
-        () => {
-          this.setData({
-            maskAnimate: true,
-          });
-        }
-      );
-    },
-    // 外部隐藏调用
-    hideModal() {
-      this.setData(
-        {
-          maskAnimate: false,
-        },
-        () => {
-          setTimeout(() => {
-            this.setData({
-              showModal: false,
-            });
-          }, 400);
-        }
-      );
-    },
-    // 点击确定
-    _confirm() {
-      this.setData(
-        {
-          maskAnimate: false,
-        },
-        () => {
-          setTimeout(() => {
-            this.setData(
-              {
-                showModal: false,
-              },
-              () => {
-                this.data.confirm();
-              }
-            );
-          }, 400);
-        }
-      );
-    },
-    // 点击取消
-    _cancel() {
-      this.setData(
-        {
-          maskAnimate: false,
-        },
-        () => {
-          this.data.cancel();
-          setTimeout(() => {
-            this.setData({
-              showModal: false,
-            });
-          }, 400);
-        }
-      );
-    },
-    //点击遮罩
-    _clickMask() {
-      if (this.data.shadeClose) {
-        this.hideModal();
+  /**
+   * 生命周期函数
+   */
+  ready: function () {
+    var _this = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight,
+        });
       }
-    },
+    });
   },
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    onConfirm() {
+      if (this.properties.confirmCallback) {
+        this.properties.confirmCallback();
+      }
+      this.setData({
+        show: false
+      });
+    },
+    onCancel() {
+      if (this.properties.cancelCallback) {
+        this.properties.cancelCallback();
+      }
+      this.setData({
+        show: false
+      });
+    },
+  }
 });

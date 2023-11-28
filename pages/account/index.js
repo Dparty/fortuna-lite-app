@@ -7,7 +7,7 @@ const {
 } = require('../../api/api.js');
 
 import drawQrcode from '../../utils/weapp.qrcode.esm.js'
-
+import Modal from '../../component/modal/modal';
 
 Page({
   data: {
@@ -59,7 +59,6 @@ Page({
   },
   onShow: async function () {
     const userInfo = app.globalData.userInfo;
-    console.log(app.globalData.systeminfo.windowWidth / 2);
     const renderHeight = app.globalData.systeminfo.windowWidth / 2;
     this.setData({renderHeight: renderHeight});
 
@@ -82,16 +81,6 @@ Page({
     this.setData({
       isTraditional: app.globalData.isTraditional || false
     })
-    
-
-    // try {
-    //   const res = await API.getAccountInfo();
-    //   console.log(res)
-
-    //   this.setData({userInfo: res, userName: res.name, userId: res.id});
-
-
-    // } catch (e) {}
   },
   onHide: function () {
     // 页面隐藏
@@ -122,11 +111,16 @@ Page({
   },
 
   notfinsh: function () {
-    wx.showModal({
-      title: '提示',
-      showCancel: false,
-      content: '积分/卡券系统即将开启，敬请期待'
-    });
+    Modal.confirm({
+      message: '积分/卡券系统即将开启，敬请期待',
+      selector: '#cus-dialog',
+      confirmCallback: function() {}
+  });
+    // wx.showModal({
+    //   title: '提示',
+    //   showCancel: false,
+    //   content: '积分/卡券系统即将开启，敬请期待'
+    // });
   },
 
    // 切换简繁
@@ -150,7 +144,6 @@ Page({
   },
 
   returnToAccount: function (e) {
-    console.log("returnToAccount", e)
     this.setData({
       ifShowInfo: false
     });

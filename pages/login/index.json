@@ -7,7 +7,8 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "TransLg": "/component/transLg/transLg",
-    "tabbar": "../../component/tabbar/tabbar"
+    "tabbar": "../../component/tabbar/tabbar",
+    "cus-dialog": "/component/modal/index"
   },
   "enablePullDownRefresh": true
 }

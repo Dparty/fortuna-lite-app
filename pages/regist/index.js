@@ -4,6 +4,7 @@ const convertChs = require('../../utils/simp_trad_chs.js');
 const {
   API
 } = require('../../api/api.js');
+import Modal from '../../component/modal/modal';
 
 
 Page({
@@ -177,11 +178,9 @@ Page({
         nameFlag: "visibility: hidden;"
       });
     }
-
   },
 
   bindDateChange: function (e) {
-    console.log(e);
     this.setData({
       birthday: e.detail.value
     })
@@ -337,23 +336,23 @@ Page({
 
         // account exists
         if(res.code === '40009'){
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '用户已存在，请直接登录',
-            success:function(res) {
-              if (res.confirm) {
-                wx.redirectTo({
-                  url: '../login/index'
-                })} 
+          Modal.confirm({
+            message: '用户已存在，请直接登录',
+            selector: '#cus-dialog',
+            confirmCallback: function () {
+              wx.redirectTo({
+                url: '../login/index'
+              })
             }
           });
+
         }else if(res.code === '40006'){
           // verification fault
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '验证码错误',
+          Modal.confirm({
+            message: '验证码错误',
+            selector: '#cus-dialog',
+            confirmCallback: function () {
+            }
           });
         }
         
@@ -459,9 +458,22 @@ Page({
         phoneNumber: {
           areaCode: this.data.areaCode,
           number: this.data.number,
-        }
+        },
+        purpose: 'REGISTER'
       });
 
+      if(res.data.code === '80000'){
+        Modal.confirm({
+          message: '用户已存在，请直接登录',
+          selector: '#cus-dialog',
+          confirmCallback: function () {
+            wx.redirectTo({
+              url: '../login/index'
+            })
+          }
+        });
+
+      }
     }
 
   },

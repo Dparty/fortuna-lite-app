@@ -50,7 +50,6 @@ Page({
 
   getopendetail: function (e) {
     const id = e.detail;
-    console.log(this.data.list2[id-1].url);
     wx.navigateTo({
       url: this.data.list2[id-1].url, //
       success: function () {}, //成功后的回调；
@@ -61,7 +60,6 @@ Page({
   },
 
   trans: function (e) {
-    console.log("trans", e)
     this.setData({
       isTraditional: e.detail
     });
@@ -96,7 +94,6 @@ Page({
   },
 
   onLoad: async function () {
-    console.log("index-onload")
     this.transList();
     this.setData({
       isTraditional: app.globalData.isTraditional || false
@@ -110,9 +107,6 @@ Page({
       var that = this;
       //调用应用实例的方法获取全局数据
       await app.getUserInfo(function (userInfo) {
-        //更新数据
-        console.log("userInfo", userInfo);
-
         that.setData({
           welcomeText: "欢迎您，",
           name: app.globalData.userInfo.name,

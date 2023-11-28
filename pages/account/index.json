@@ -8,7 +8,7 @@
   "usingComponents": {
     "TransLg": "/component/transLg/transLg",
     "Info": "/component/info/index",
-    "modal": "/component/modal/index"
+    "cus-dialog": "/component/modal/index"
   }
 
 }
