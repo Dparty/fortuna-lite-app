@@ -354,9 +354,16 @@ Page({
           });
         }
         else{
-          wx.reLaunch({
-            url: '../index/index'
-          })
+          if (res.token) {
+            // 登錄成功設置token
+            wx.setStorage({
+              key: "token",
+              data: res.token
+            });
+            wx.reLaunch({
+              url: '../index/index'
+            })
+          }
         }
       }else{
         Modal.confirm({
