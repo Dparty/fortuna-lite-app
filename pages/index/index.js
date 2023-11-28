@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp();
+var util = require("../../utils/util.js");
 const {
   API
 } = require('../../api/api.js');
@@ -110,16 +111,14 @@ Page({
       //调用应用实例的方法获取全局数据
       await app.getUserInfo(function (userInfo) {
         //更新数据
-        console.log("userInfo", userInfo)
+        console.log("userInfo", userInfo);
+
         that.setData({
-          userInfo: userInfo,
+          welcomeText: "欢迎您，",
+          name: app.globalData.userInfo.name,
+          userInfo: {...userInfo, birthday: util.formatDate(userInfo.birthday)},
         })
       });
-      that.setData({
-        userInfo: app.globalData.userInfo,
-        welcomeText: "欢迎您，",
-        name: app.globalData.userInfo.name
-      })
     }
 
   }

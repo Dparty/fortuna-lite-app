@@ -60,6 +60,5 @@ page{
 }
 
 .article-area{
-  width: 100%;
-  margin-left: 90rpx;
+  width: 90%;
 }

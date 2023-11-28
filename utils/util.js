@@ -16,31 +16,31 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-function regexConfig(){
+function regexConfig() {
   var reg = {
-    email:/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
-    phone:{
+    email: /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/,
+    phone: {
       '86': /^1(3|4|5|7|8)\d{9}$/,
-      '852': /^([4|5|6|7|8|9])d{7}$/,
+      '852': /^([4|5|6|7|8|9])\d{7}$/,
       '853': /^[6]\d{7}/,
     },
   }
   return reg;
 }
 
-function promisic (func) {
-  return function(params= {}) { 
-      return new Promise((resolve,reject)=> {
-          const args = Object.assign(params,{
-              success:res=>{
-                  resolve(res)
-              },
-              fail:err=>{
-                  reject(err)
-              }
-          })
-          func(args);
+function promisic(func) {
+  return function (params = {}) {
+    return new Promise((resolve, reject) => {
+      const args = Object.assign(params, {
+        success: res => {
+          resolve(res)
+        },
+        fail: err => {
+          reject(err)
+        }
       })
+      func(args);
+    })
   }
 }
 
@@ -48,13 +48,60 @@ const getNowDate = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
-  return [year, month,day].map(formatNumber).join('-')
+  return [year, month, day].map(formatNumber).join('-')
 }
 
 
+//参数为格式化日期
+var unixtime = function (strtime = false) { //不传入日期默认今日
+  strtime = strtime.replace(/-/g, '/') //解决低版本解释new Date('yyyy-mm-dd')这个对象出现NaN
+  if (strtime) {
+    var date = new Date(strtime);
+  } else {
+    var date = new Date();
+  }
+  var time1 = date.getTime(); //会精确到毫秒---长度为13位
+  var time2 = date.valueOf(); //会精确到毫秒---长度为13位
+  var time3 = Date.parse(date); //只能精确到秒，毫秒将用0来代替---长度为10位
+  return time3;
+}
+
+var formatDate = function (timestamp) { //传入时间戳，不传默认为今日
+  if (timestamp) {
+    var date = new Date(timestamp);
+  } else {
+    var date = new Date();
+  }
+  var Y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  var d = date.getDate();
+  var H = date.getHours();
+  var i = date.getMinutes();
+  var s = date.getSeconds();
+  if (m < 10) {
+    m = '0' + m;
+  }
+  if (d < 10) {
+    d = '0' + d;
+  }
+  if (H < 10) {
+    H = '0' + H;
+  }
+  if (i < 10) {
+    i = '0' + i;
+  }
+  if (s < 10) {
+    s = '0' + s;
+  }
+  var t = Y + '-' + m + '-' + d + ' ' + H + ':' + i; //+':'+s;
+  return t;
+}
+
 module.exports = {
   formatTime: formatTime,
-  regexConfig:regexConfig,
+  regexConfig: regexConfig,
   promisic: promisic,
-  getNowDate: getNowDate
+  getNowDate: getNowDate,
+  unixtime: unixtime,
+  formatDate: formatDate,
 }
