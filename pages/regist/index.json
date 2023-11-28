@@ -4,5 +4,8 @@
   "navigationBarTitleText": "",
   "backgroundColor": "#3B243D",
   "backgroundTextStyle": "light",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "cus-dialog": "/component/modal/index"
+  }
 }

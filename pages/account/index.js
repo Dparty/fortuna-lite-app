@@ -7,7 +7,7 @@ const {
 } = require('../../api/api.js');
 
 import drawQrcode from '../../utils/weapp.qrcode.esm.js'
-
+import Modal from '../../component/modal/modal';
 
 Page({
   data: {
@@ -122,11 +122,18 @@ Page({
   },
 
   notfinsh: function () {
-    wx.showModal({
-      title: '提示',
-      showCancel: false,
-      content: '积分/卡券系统即将开启，敬请期待'
-    });
+    Modal.confirm({
+      message: '积分/卡券系统即将开启，敬请期待',
+      selector: '#cus-dialog',
+      confirmCallback: function() {
+          console.log('确认啦');
+      }
+  });
+    // wx.showModal({
+    //   title: '提示',
+    //   showCancel: false,
+    //   content: '积分/卡券系统即将开启，敬请期待'
+    // });
   },
 
    // 切换简繁

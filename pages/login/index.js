@@ -5,6 +5,7 @@ const convertChs = require('../../utils/simp_trad_chs.js');
 const {
   API
 } = require('../../api/api.js');
+import Modal from '../../component/modal/modal';
 
 Page({
   data: {
@@ -20,24 +21,24 @@ Page({
     phonePH: '电话号码',
     codePH: '验证码',
     areaCodeArray: [{
-      id: 86,
-      name: '86',
-      label: '中国大陆 +86',
-      value: '86',
-    },
-    {
-      id: 853,
-      name: '853',
-      label: '澳门 +853',
-      value: '853',
-    },
-    {
-      id: 852,
-      name: '852',
-      label: '香港 +852',
-      value: '852',
-    },
-  ],
+        id: 86,
+        name: '86',
+        label: '中国大陆 +86',
+        value: '86',
+      },
+      {
+        id: 853,
+        name: '853',
+        label: '澳门 +853',
+        value: '853',
+      },
+      {
+        id: 852,
+        name: '852',
+        label: '香港 +852',
+        value: '852',
+      },
+    ],
     number: '',
     verificationCode: '',
     areaCode: '86',
@@ -60,18 +61,18 @@ Page({
       });
     }
 
-      // 配置tabbar
-      var tabbarData = getApp().globalData.tabbar;
-      var item_menu_selected = tabbarData[1];
-      var tabbarKey = item_menu_selected.title;
-      var selectedTabbarIdx = this.get_tabar_idx_from_name(tabbarData, tabbarKey);
-      this.setData({
-        dataForTabbar: tabbarData,
-        selectedTabbarKey: tabbarKey,
-        selectedTabbarIdx: selectedTabbarIdx,
-        scroll_top: 0,
-      });
-  
+    // 配置tabbar
+    var tabbarData = getApp().globalData.tabbar;
+    var item_menu_selected = tabbarData[1];
+    var tabbarKey = item_menu_selected.title;
+    var selectedTabbarIdx = this.get_tabar_idx_from_name(tabbarData, tabbarKey);
+    this.setData({
+      dataForTabbar: tabbarData,
+      selectedTabbarKey: tabbarKey,
+      selectedTabbarIdx: selectedTabbarIdx,
+      scroll_top: 0,
+    });
+
   },
   onReady: function () {
 
@@ -92,29 +93,29 @@ Page({
 
   },
 
-    // 点击tabbar item
-    onTabbarItemTap: function (res) {
-      console.log(res);
-      var tabItem = res.detail;
-      var dataForTabbar = this.data.dataForTabbar;
-      var idx = this.get_tabar_idx_from_name(dataForTabbar, tabItem.title);
-      if (tabItem.title.indexOf(this.data.selectedTabbarKey) != -1) { // 点击已经选中的tab，不做处理
-        return;
-      }
+  // 点击tabbar item
+  onTabbarItemTap: function (res) {
+    console.log(res);
+    var tabItem = res.detail;
+    var dataForTabbar = this.data.dataForTabbar;
+    var idx = this.get_tabar_idx_from_name(dataForTabbar, tabItem.title);
+    if (tabItem.title.indexOf(this.data.selectedTabbarKey) != -1) { // 点击已经选中的tab，不做处理
+      return;
+    }
 
-      if(idx == 0){
-        wx.reLaunch({
-          url: '../index/index',
-        })
-      }
+    if (idx == 0) {
+      wx.reLaunch({
+        url: '../index/index',
+      })
+    }
 
-      this.setData({
-        selectedTabbarKey: tabItem.title,
-        selectedTabbarIdx: idx,
-        scroll_top: 2,
-      });
+    this.setData({
+      selectedTabbarKey: tabItem.title,
+      selectedTabbarIdx: idx,
+      scroll_top: 2,
+    });
 
-    },
+  },
 
   // 根据名称获取tabbar的选中idx
   get_tabar_idx_from_name: function (dataForTabbar, tabbar_name) {
@@ -187,9 +188,9 @@ Page({
     })
   },
 
-  
+
   bindPickerChange: function (e) {
-    console.log( this.data.areaCodeArray[e.detail.value].value)
+    console.log(this.data.areaCodeArray[e.detail.value].value)
     this.setData({
       areaCode: this.data.areaCodeArray[e.detail.value].value
     })
@@ -236,22 +237,34 @@ Page({
           phoneNumber: {
             areaCode: this.data.areaCode,
             number: this.data.number,
-          }
+          },
+          purpose: 'LOGIN'
         });
         console.log(res);
         if (res.data.code === '80001') {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '请勿频繁请求验证码'
+          Modal.confirm({
+            message:  '请勿频繁请求验证码',
+            selector: '#cus-dialog',
+            confirmCallback: function () {}
+          });
+        } else if (res.data.code === '80002') {
+          Modal.confirm({
+            message: '用户不存在，请先注册',
+            selector: '#cus-dialog',
+            confirmCallback: function () {
+              wx.redirectTo({
+                url: '../regist/index'
+              })
+            }
           });
         }
       } catch (e) {
         console.log(e);
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '验证码获取失败'
+        Modal.confirm({
+          message: '验证码获取失败',
+          selector: '#cus-dialog',
+          confirmCallback: function () {
+          }
         });
       }
 
@@ -296,30 +309,23 @@ Page({
       if (res) {
         // authentication failed
         if (res.code === '40001') {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '手机号或验证码错误',
-            success: function (res) {
-              if (res.confirm) {}
-            }
+          Modal.confirm({
+            message:  '手机号或验证码错误',
+            selector: '#cus-dialog',
+            confirmCallback: function () {}
           });
         } // account not found
         else if (res.code === '40002') {
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '手机号不存在，请先注册',
-            success: function (res) {
-              if (res.confirm) {
-                wx.redirectTo({
-                  url: '../regist/index'
-                })
-              }
+          Modal.confirm({
+            message:  '手机号不存在，请先注册',
+            selector: '#cus-dialog',
+            confirmCallback: function () {
+              wx.redirectTo({
+                url: '../regist/index'
+              })
             }
           });
-        } 
-        else if(res.token) {
+        } else if (res.token) {
           // 登錄成功設置token
           wx.setStorage({
             key: "token",
@@ -331,10 +337,10 @@ Page({
           })
         }
       } else {
-        wx.showModal({
-          title: '提示',
-          showCancel: false,
-          content: '登录失败'
+        Modal.confirm({
+          message:  '登录失败',
+          selector: '#cus-dialog',
+          confirmCallback: function () {}
         });
       }
 
@@ -353,7 +359,7 @@ Page({
   },
 
   transData: function () {
-    
+
     this.setData({
       phonePH: convertChs.convert(this.data.phonePH, app.globalData.isTraditional),
       codePH: convertChs.convert(this.data.codePH, app.globalData.isTraditional),

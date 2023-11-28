@@ -1,11 +1,9 @@
 const {
   API
 } = require('/api/api.js');
-import Modal from './component/modal/modal';
 
 //app.js
 App({
-  Modal: Modal,
   onLaunch: function () {
     var that = this;
     this.globalData.headerBtnPosi = wx.getMenuButtonBoundingClientRect()

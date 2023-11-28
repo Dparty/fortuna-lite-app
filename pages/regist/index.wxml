@@ -1,4 +1,5 @@
 <wxs src="../../utils/chs.wxs" module="chs" /> {{chs.setTraditional(isTraditional)}}
+<cus-dialog id="cus-dialog"/>
 
 <view class="content">
   <image class="navBg" mode="widthFix" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/background.png"></image>
