@@ -9,7 +9,7 @@
       <TransLg isTraditional="{{isTraditional}}" bind:trans='trans'></TransLg>
     </view>
 
-    <view class="btn-area">
+    <view wx:if="{{showButtonGroup}}" class="btn-area">
       <button disabled="{{disabled}}" style="background-color:{{registerBtnBgBgColor}}" bindtap='toRegisterView'> {{chs.convert(registerBtnTxt)}} </button>
 
       <button class="nobg" disabled="{{disabled}}" style="background-color:{{loginBtnBgBgColor}}" bindtap='toLoginView'> {{chs.convert(loginBtnTxt)}} </button>

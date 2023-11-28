@@ -8,6 +8,7 @@ const {
 const convertChs = require('../../utils/simp_trad_chs.js');
 Page({
   data: {
+    showButtonGroup: true,
     welcomeText: "欢迎加入澳门财神酒店会员 ！",
     loginBtnBgBgColor: "transparent",
     registerBtnBgBgColor: "#F8D585",
@@ -51,7 +52,7 @@ Page({
   getopendetail: function (e) {
     const id = e.detail;
     wx.navigateTo({
-      url: this.data.list2[id-1].url, //
+      url: this.data.list2[id - 1].url, //
       success: function () {}, //成功后的回调；
 
       fail: function () {}, //失败后的回调；
@@ -65,8 +66,8 @@ Page({
     });
     this.transList();
   },
-  onShow: async function () {
-
+  onShow: function () {
+    this.onLoad();
     // if(wx.getStorageSync('token')){
     //   try {
     //     console.log(wx.getStorageSync('token'));
@@ -99,20 +100,39 @@ Page({
       isTraditional: app.globalData.isTraditional || false
     });
 
-    // if(app.globalData.userInfo){
-    //   this.setData({welcomeText: "欢迎您，", name: app.globalData.userInfo.name});
-    // }
-
     if (wx.getStorageSync('token')) {
-      var that = this;
-      //调用应用实例的方法获取全局数据
-      await app.getUserInfo(function (userInfo) {
-        that.setData({
-          welcomeText: "欢迎您，",
-          name: app.globalData.userInfo.name,
-          userInfo: {...userInfo, birthday: util.formatDate(userInfo.birthday)},
-        })
-      });
+      try {
+        const res = await API.getAccountInfo();
+        if (res) {
+          app.globalData.userInfo = res;
+          this.setData({
+            showButtonGroup: false,
+            welcomeText: "欢迎您，",
+            name: res.name,
+          })
+        }else{
+          // token 过期的情况
+          wx.setStorage({
+            key: "token",
+            data: ''
+          });
+          app.globalData.userInfo = null;
+        }
+
+      } catch (e) {
+      }
+
+      // var that = this;
+      // //调用应用实例的方法获取全局数据
+      // const res = await app.getUserInfo(function (userInfo) {
+      //   that.setData({
+      //     showButtonGroup: false,
+      //     welcomeText: "欢迎您，",
+      //     name: app.globalData.userInfo.name,
+      //     userInfo: {...userInfo, birthday: util.formatDate(userInfo.birthday)},
+      //   })
+      // });
+      // console.log(res);
     }
 
   }

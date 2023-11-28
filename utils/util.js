@@ -62,40 +62,27 @@ var unixtime = function (strtime = false) { //不传入日期默认今日
   }
   var time1 = date.getTime(); //会精确到毫秒---长度为13位
   var time2 = date.valueOf(); //会精确到毫秒---长度为13位
-  var time3 = Date.parse(date)/1000; //只能精确到秒，毫秒将用0来代替---长度为10位
+  var time3 = Date.parse(date) / 1000; //只能精确到秒，毫秒将用0来代替---长度为10位
   return time3;
 }
 
-var formatDate = function (timestamp) { //传入时间戳，不传默认为今日
-  if (timestamp) {
-    var date = new Date(timestamp);
-  } else {
-    var date = new Date();
-  }
-  var Y = date.getFullYear();
-  var m = date.getMonth() + 1;
-  var d = date.getDate();
-  var H = date.getHours();
-  var i = date.getMinutes();
-  var s = date.getSeconds();
-  if (m < 10) {
-    m = '0' + m;
-  }
-  if (d < 10) {
-    d = '0' + d;
-  }
-  if (H < 10) {
-    H = '0' + H;
-  }
-  if (i < 10) {
-    i = '0' + i;
-  }
-  if (s < 10) {
-    s = '0' + s;
-  }
-  var t = Y + '-' + m + '-' + d + ' ' + H + ':' + i; //+':'+s;
-  return t;
+var formatDate = function (time) { //时间戳转日期
+  let date = new Date(parseInt(time) * 1000);
+  let y = date.getFullYear();
+  let MM = date.getMonth() + 1;
+  MM = MM < 10 ? ('0' + MM) : MM;
+  let d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  let h = date.getHours();
+  h = h < 10 ? ('0' + h) : h;
+  let m = date.getMinutes();
+  m = m < 10 ? ('0' + m) : m;
+  let s = date.getSeconds();
+  s = s < 10 ? ('0' + s) : s;
+  return y + '年' + MM + '月' + d + '日';
+  // return y + '-' + MM + '-' + d;
 }
+
 
 module.exports = {
   formatTime: formatTime,

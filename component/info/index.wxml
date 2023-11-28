@@ -21,11 +21,11 @@
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('性别')}}</text>
-      <text class="info-item-value">{{userInfo.gender}}</text>
+      <text class="info-item-value">{{gender}}</text>
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('生日')}}</text>
-      <text class="info-item-value">{{format.formatDate(userInfo.birthday)}}</text>
+      <text class="info-item-value">{{birthday}}</text>
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('电话号码')}}</text>
@@ -33,7 +33,7 @@
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('用户类型')}}</text>
-      <text class="info-item-value">{{userInfo.services}}</text>
+      <text class="info-item-value">{{services}}</text>
     </view>
   </view>
     <view class="info-bottom"><text>*小程序暂不支持修改用户信息，请知悉。</text></view>

@@ -1,3 +1,4 @@
+const util = require("../../utils/util");
 const app = getApp()
 
 Component({
@@ -18,13 +19,32 @@ Component({
     isShow: true,
     welcomeText: "个人信息",
     isTraditional: false,
+    services: '',
+    gender: '',
+    birthday: '',
+    typeMap: {
+      "F_AND_B": "酒店餐饮",
+      "ENTERTAINMENT": "娱乐消费"
+    },
+    genderMap: {
+      "FEMALE": "女",
+      "MALE": "男"
+    },
   },
 
   attached: function () {
     console.log("ready")
+    var userInfo = this.properties.userInfo;
+    console.log(userInfo, this.data.genderMap[userInfo.gender]);
+    var services = userInfo.services?.map(e => {
+      return this.data.typeMap[e]
+    }).join('，');
     this.setData({
-      isTraditional: app.globalData.isTraditional || false
-    })
+      isTraditional: app.globalData.isTraditional || false,
+      services: services,
+      gender: this.data.genderMap[userInfo.gender],
+      birthday: util.formatDate(userInfo.birthday)
+    });
   },
   methods: {
     _iconLeftTap: function (e) {
@@ -42,4 +62,3 @@ Component({
     }
   }
 })
-
