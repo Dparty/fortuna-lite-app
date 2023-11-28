@@ -62,7 +62,7 @@ var unixtime = function (strtime = false) { //不传入日期默认今日
   }
   var time1 = date.getTime(); //会精确到毫秒---长度为13位
   var time2 = date.valueOf(); //会精确到毫秒---长度为13位
-  var time3 = Date.parse(date); //只能精确到秒，毫秒将用0来代替---长度为10位
+  var time3 = Date.parse(date)/1000; //只能精确到秒，毫秒将用0来代替---长度为10位
   return time3;
 }
 

@@ -308,7 +308,6 @@ Page({
       valid = false;
 
     }
-
     return valid;
   },
 
@@ -324,8 +323,6 @@ Page({
       gender: this.data.gender,
       name: this.data.username,
       services: this.data.services,
-      // lastName: values.lastName,
-      // birthday: moment.utc(`${values.birthday} ${"00:00"}`).unix(),
       birthday: util.unixtime(this.data.birthday)
     };
 
@@ -333,7 +330,6 @@ Page({
       const res = await API.register(data);
 
       if(res){
-
         // account exists
         if(res.code === '40009'){
           Modal.confirm({
@@ -345,7 +341,6 @@ Page({
               })
             }
           });
-
         }else if(res.code === '40006'){
           // verification fault
           Modal.confirm({
@@ -355,20 +350,25 @@ Page({
             }
           });
         }
-        
         else{
-
-          wx.redirectTo({
-            url: '../login/index'
-          })
+          if (res.token) {
+            // 登錄成功設置token
+            wx.setStorage({
+              key: "token",
+              data: res.token
+            });
+            wx.reLaunch({
+              url: '../index/index'
+            })
+          }
         }
-
       }else{
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '注册失败'
-          });
+        Modal.confirm({
+          message: '登录失败',
+          selector: '#cus-dialog',
+          confirmCallback: function () {
+          }
+        });
       }
     } catch (e) {
 
