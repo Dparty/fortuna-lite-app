@@ -55,7 +55,6 @@ Page({
   },
   onLoad: function (options) {
     if (wx.getStorageSync('token')) {
-      console.log("onLoad", wx.getStorageSync('token'))
       wx.switchTab({
         url: '../account/index'
       });
@@ -95,7 +94,6 @@ Page({
 
   // 点击tabbar item
   onTabbarItemTap: function (res) {
-    console.log(res);
     var tabItem = res.detail;
     var dataForTabbar = this.data.dataForTabbar;
     var idx = this.get_tabar_idx_from_name(dataForTabbar, tabItem.title);
@@ -190,7 +188,6 @@ Page({
 
 
   bindPickerChange: function (e) {
-    console.log(this.data.areaCodeArray[e.detail.value].value)
     this.setData({
       areaCode: this.data.areaCodeArray[e.detail.value].value
     })
@@ -240,7 +237,6 @@ Page({
           },
           purpose: 'LOGIN'
         });
-        console.log(res);
         if (res.data.code === '80001') {
           Modal.confirm({
             message:  '请勿频繁请求验证码',
@@ -259,7 +255,6 @@ Page({
           });
         }
       } catch (e) {
-        console.log(e);
         Modal.confirm({
           message: '验证码获取失败',
           selector: '#cus-dialog',
@@ -351,7 +346,6 @@ Page({
   },
 
   trans: function (e) {
-    console.log("trans", e)
     this.setData({
       isTraditional: e.detail
     });

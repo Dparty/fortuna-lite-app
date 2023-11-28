@@ -59,7 +59,6 @@ Page({
   },
   onShow: async function () {
     const userInfo = app.globalData.userInfo;
-    console.log(app.globalData.systeminfo.windowWidth / 2);
     const renderHeight = app.globalData.systeminfo.windowWidth / 2;
     this.setData({renderHeight: renderHeight});
 
@@ -82,16 +81,6 @@ Page({
     this.setData({
       isTraditional: app.globalData.isTraditional || false
     })
-    
-
-    // try {
-    //   const res = await API.getAccountInfo();
-    //   console.log(res)
-
-    //   this.setData({userInfo: res, userName: res.name, userId: res.id});
-
-
-    // } catch (e) {}
   },
   onHide: function () {
     // 页面隐藏
@@ -125,9 +114,7 @@ Page({
     Modal.confirm({
       message: '积分/卡券系统即将开启，敬请期待',
       selector: '#cus-dialog',
-      confirmCallback: function() {
-          console.log('确认啦');
-      }
+      confirmCallback: function() {}
   });
     // wx.showModal({
     //   title: '提示',
@@ -157,7 +144,6 @@ Page({
   },
 
   returnToAccount: function (e) {
-    console.log("returnToAccount", e)
     this.setData({
       ifShowInfo: false
     });

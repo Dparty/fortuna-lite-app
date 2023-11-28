@@ -29,7 +29,6 @@ Component({
    */
   methods: {
     onTabbarItemTap: function (res) {
-      console.log(res);
       var tabitem = res.currentTarget.dataset.tabitem;
       this.triggerEvent("onTabbarItemTap", tabitem);
     }

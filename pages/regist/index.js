@@ -178,11 +178,9 @@ Page({
         nameFlag: "visibility: hidden;"
       });
     }
-
   },
 
   bindDateChange: function (e) {
-    console.log(e);
     this.setData({
       birthday: e.detail.value
     })
