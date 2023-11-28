@@ -308,7 +308,6 @@ Page({
       valid = false;
 
     }
-
     return valid;
   },
 
@@ -324,8 +323,6 @@ Page({
       gender: this.data.gender,
       name: this.data.username,
       services: this.data.services,
-      // lastName: values.lastName,
-      // birthday: moment.utc(`${values.birthday} ${"00:00"}`).unix(),
       birthday: util.unixtime(this.data.birthday)
     };
 
