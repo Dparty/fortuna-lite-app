@@ -333,7 +333,6 @@ Page({
       const res = await API.register(data);
 
       if(res){
-
         // account exists
         if(res.code === '40009'){
           Modal.confirm({
@@ -345,7 +344,6 @@ Page({
               })
             }
           });
-
         }else if(res.code === '40006'){
           // verification fault
           Modal.confirm({
@@ -355,20 +353,18 @@ Page({
             }
           });
         }
-        
         else{
-
-          wx.redirectTo({
-            url: '../login/index'
+          wx.reLaunch({
+            url: '../index/index'
           })
         }
-
       }else{
-          wx.showModal({
-            title: '提示',
-            showCancel: false,
-            content: '注册失败'
-          });
+        Modal.confirm({
+          message: '提示',
+          selector: '#cus-dialog',
+          confirmCallback: function () {
+          }
+        });
       }
     } catch (e) {
 
