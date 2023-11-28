@@ -367,7 +367,7 @@ Page({
         }
       }else{
         Modal.confirm({
-          message: '提示',
+          message: '登录失败',
           selector: '#cus-dialog',
           confirmCallback: function () {
           }
