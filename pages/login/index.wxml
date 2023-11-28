@@ -54,6 +54,7 @@
       </view>
     </form>
   </view>
+  <modal class="diy-modal"></modal>
   <!--tabbar  -->
   <tabbar dataForTabbar='{{dataForTabbar}}' selectedTabbarIdx='{{selectedTabbarIdx}}' bindonTabbarItemTap='onTabbarItemTap'></tabbar>
 </view>

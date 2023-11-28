@@ -156,8 +156,8 @@ Page({
     });
 
     drawQrcode({
-      width: renderHeight,
-      height: renderHeight,
+      width: this.data.renderHeight,
+      height: this.data.renderHeight,
       canvasId: 'myQrcode',
       // ctx: wx.createCanvasContext('myQrcode'),
       text: app.globalData.userInfo.id,

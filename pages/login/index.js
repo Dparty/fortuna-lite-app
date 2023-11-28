@@ -20,21 +20,24 @@ Page({
     phonePH: '电话号码',
     codePH: '验证码',
     areaCodeArray: [{
-        id: 86,
-        name: '86',
-        label: '中国大陆 +86'
-      },
-      {
-        id: 853,
-        name: '853',
-        label: '澳门 +853',
-      },
-      {
-        id: 852,
-        name: '852',
-        label: '香港 +852',
-      },
-    ],
+      id: 86,
+      name: '86',
+      label: '中国大陆 +86',
+      value: '86',
+    },
+    {
+      id: 853,
+      name: '853',
+      label: '澳门 +853',
+      value: '853',
+    },
+    {
+      id: 852,
+      name: '852',
+      label: '香港 +852',
+      value: '852',
+    },
+  ],
     number: '',
     verificationCode: '',
     areaCode: '86',
@@ -70,7 +73,9 @@ Page({
       });
   
   },
-  onReady: function () {},
+  onReady: function () {
+
+  },
   onShow: function () {
     // 页面显示
     this.setData({
@@ -177,6 +182,14 @@ Page({
   },
 
   bindPickerChange: function (e) {
+    this.setData({
+      areaCode: this.data.areaCodeArray[e.detail.value].value
+    })
+  },
+
+  
+  bindPickerChange: function (e) {
+    console.log( this.data.areaCodeArray[e.detail.value].value)
     this.setData({
       areaCode: this.data.areaCodeArray[e.detail.value].value
     })
@@ -291,7 +304,22 @@ Page({
               if (res.confirm) {}
             }
           });
-        } else if(res.token) {
+        } // account not found
+        else if (res.code === '40002') {
+          wx.showModal({
+            title: '提示',
+            showCancel: false,
+            content: '手机号不存在，请先注册',
+            success: function (res) {
+              if (res.confirm) {
+                wx.redirectTo({
+                  url: '../regist/index'
+                })
+              }
+            }
+          });
+        } 
+        else if(res.token) {
           // 登錄成功設置token
           wx.setStorage({
             key: "token",

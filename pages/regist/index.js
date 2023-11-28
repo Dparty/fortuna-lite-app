@@ -327,7 +327,7 @@ Page({
       services: this.data.services,
       // lastName: values.lastName,
       // birthday: moment.utc(`${values.birthday} ${"00:00"}`).unix(),
-      birthday: Date.parse(new Date(this.data.birthday))
+      birthday: util.unixtime(this.data.birthday)
     };
 
     try {

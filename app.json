@@ -9,6 +9,9 @@
     "pages/outer-hotel/intro",
     "pages/outer-menu/menu"
   ],
+  "usingComponents": {
+    "modal": "/component/modal/index"
+  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",

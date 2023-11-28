@@ -25,7 +25,7 @@
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('生日')}}</text>
-      <text class="info-item-value">{{userInfo.birthday}}</text>
+      <text class="info-item-value">{{format.formatDate(userInfo.birthday)}}</text>
     </view>
     <view class="info-item">
       <text class="info-item-title">{{chs.convert('电话号码')}}</text>

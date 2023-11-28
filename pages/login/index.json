@@ -9,7 +9,5 @@
     "TransLg": "/component/transLg/transLg",
     "tabbar": "../../component/tabbar/tabbar"
   },
-
   "enablePullDownRefresh": true
-
 }

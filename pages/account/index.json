@@ -7,7 +7,8 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "TransLg": "/component/transLg/transLg",
-    "Info": "/component/info/index"
+    "Info": "/component/info/index",
+    "modal": "/component/modal/index"
   }
 
 }
