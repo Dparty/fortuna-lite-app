@@ -37,7 +37,7 @@
           <view class="input-name-wrapper-main">
             <text class="{{stUserName==0 ? 'hint':'hint-active'}}">姓名</text>
             <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/userIcon.svg" />
+              <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/name.png" />
             </view>
             <input id="username" name="username" maxlength='11' type="text" placeholder-class="{{stUserName==0 ? 'ph-hint':'ph-hint-active'}}" placeholder='姓名' bindfocus="userNameFocus" bindblur='userNameBlur' bindinput="bindUserNameChange"></input>
           </view>
@@ -47,7 +47,7 @@
         <view class="birthBox">
           <view class="birthBox-left">
             <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/birthIcon.svg" />
+              <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/birth.png" />
             </view>
             <label>生日</label>
           </view>
@@ -62,7 +62,7 @@
           <view class="gender-select">
             <view class="gender-select-left">
               <view class="svg_icon">
-                <image class="svg_icon-inner" src="../../images/path/genderIcon.svg" />
+                <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/gender.png" />
               </view>
               <label>{{chs.convert("性别")}}</label>
             </view>
@@ -86,7 +86,7 @@
           <view class="commeon_css tel_input">
             <view class="tel_left" bindtap="choosePhoneCode">
               <view class="svg_icon">
-                <image class="svg_icon-inner" src="../../images/path/phoneIcon.svg" />
+                <image mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/phone.png" />
               </view>
               <text class="areaCode-top">{{chs.convert('区号')}}</text>
               <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
@@ -105,7 +105,7 @@
               <button bindtap="getSmsCode" disabled="{{smsCodeDisabled}}" style="background-color:{{getSmsCodeBtnColor}}" class="getSmsCodeBtn">{{chs.convert(getSmsCodeBtnTxt)}}</button>
             </view>
           </view>
-          <view style='{{phoneFlag}}' class="error-msg">{{chs.convert('电话号码格式错误')}}</view>
+          <view style='{{phoneFlag}}' class="phone-error-msg">{{chs.convert('电话号码格式错误')}}</view>
 
         </view>
 
@@ -113,9 +113,9 @@
           <view class="smsCode">
             <text class="{{stCode==0 ? 'hint':'hint-active'}}">{{codePH}}</text>
             <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/codeIcon.svg" />
+              <image mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/code.png" />
             </view>
-            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="{{codePH}}" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
+            <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="{{codePH}}" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' focus="{{phoneFocus}}" />
           </view>
           <view style='{{codeFlag}}' class="error-msg">{{chs.convert('验证码不能为空')}}</view>
         </view>
@@ -123,7 +123,7 @@
         <view class="usertype-checkbox">
           <view class="usertype-checkbox-left">
             <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/userTypeIcon.svg" />
+              <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/type.png" />
             </view>
             <label>{{chs.convert("用户类型")}}</label>
           </view>
@@ -144,8 +144,6 @@
             </label>
           </checkbox-group>
         </view>
-
-
       </view>
       <view class="btn-area">
         <button disabled="{{registDisabled}}" style="background-color:{{registBtnBgBgColor}}" formType="submit" loading="{{btnLoading}}"> {{chs.convert(registBtnTxt)}} </button>

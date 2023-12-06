@@ -7,13 +7,6 @@ class API {
       data: params,
       method: 'POST'
     })
-    if(res.data.code === '80001'){
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '请勿频繁请求验证码'
-      });
-    }
     return res;
   }
 

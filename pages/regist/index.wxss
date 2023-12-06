@@ -99,6 +99,13 @@ page{
   margin-top: 10rpx;
 }
 
+.phone-error-msg{
+  font-size: 25rpx;
+  color: red;
+  margin-top: 10rpx;
+  margin-left: 170rpx;
+}
+
 /* 驗證碼 */
 .smsCode-wrapper{
   margin-bottom: 20rpx;

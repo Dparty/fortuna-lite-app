@@ -23,6 +23,7 @@ Page({
     disabled: false,
     inputUserName: '',
     inputPassword: '',
+    points: 0,
 
     userInfo: {},
     ifShowInfo: false,
@@ -43,6 +44,7 @@ Page({
     isTraditional: false,
 
     renderHeight: 180,
+    canvasImg: "",
 
   },
   onLoad: function (options) {
@@ -63,12 +65,15 @@ Page({
     this.setData({renderHeight: renderHeight});
 
     if(userInfo){
-      this.setData({userInfo: userInfo});
+      this.setData({userInfo: userInfo, userName: userInfo.name});
+      if(userInfo.points){
+        this.setData({points: userInfo.points});
+      }
       drawQrcode({
         width: renderHeight,
         height: renderHeight,
         canvasId: 'myQrcode',
-        // ctx: wx.createCanvasContext('myQrcode'),
+        ctx: wx.createCanvasContext('myQrcode'),
         text: userInfo.id,
       })
     }
@@ -93,28 +98,80 @@ Page({
 
 
   logout: function(){
-    wx.setStorage({
-      key: "token",
-      data: ''
-    });
-    app.globalData.userInfo = null;
-
-    wx.reLaunch({
-      url: '../index/index' // 回到首页
-    })
+    this.handleCanvarToImg();
+    var that = this;
+    Modal.confirm({
+      showCancel: true,
+      cancelButtonText: '否',
+      confirmButtonText: '是',
+      message: '是否确认退出登录？',
+      selector: '#cus-dialog',
+      confirmCallback: function() {
+        wx.setStorage({
+          key: "token",
+          data: ''
+        });
+        app.globalData.userInfo = null;
+    
+        wx.reLaunch({
+          url: '../index/index' // 回到首页
+        })
+      },
+      cancelCallback: function(){
+        that.setData({
+          canvasImg: ''
+        });
+        drawQrcode({
+          width: that.data.renderHeight,
+          height:  that.data.renderHeight,
+          canvasId: 'myQrcode',
+          text: that.data.userInfo.id,
+        })
+      }
+  });
+    
+   
   },
 
-
+  handleCanvarToImg(){
+    wx.canvasToTempFilePath({
+      // x: 0,
+      // y: 0,
+      width: this.data.renderHeight,
+      height: this.data.renderHeight,
+      canvasId: 'myQrcode',
+      success: (res) => {
+        console.log(res)
+         
+        this.setData({
+          canvasImg : res.tempFilePath
+        });
+         this.canvasImg = res.tempFilePath
+      }
+    });
+ },
 
   showInfo: function () {
     this.setData({ifShowInfo: true});
   },
 
   notfinsh: function () {
+    this.handleCanvarToImg();
+    var that = this;
     Modal.confirm({
-      message: '积分/卡券系统即将开启，敬请期待',
+      message: '积分/卡券系统即将开启，\n敬请期待 !',
       selector: '#cus-dialog',
-      confirmCallback: function() {}
+      confirmCallback: function() {
+        that.setData({
+          canvasImg: ''
+        });
+        drawQrcode({
+          width: that.data.renderHeight,
+          height:  that.data.renderHeight,
+          canvasId: 'myQrcode',
+          text: that.data.userInfo.id,
+        })
+      }
   });
     // wx.showModal({
     //   title: '提示',

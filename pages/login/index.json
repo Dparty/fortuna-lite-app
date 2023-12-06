@@ -1,4 +1,5 @@
 {
+  "disableScroll":true,
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "登录",

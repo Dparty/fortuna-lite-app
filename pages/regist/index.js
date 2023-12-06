@@ -89,7 +89,9 @@ Page({
     nameFlag: "visibility: hidden;",
     phoneFlag: "visibility: hidden;",
     codeFlag: "visibility: hidden;",
-    genderFlag: "visibility: hidden;"
+    genderFlag: "visibility: hidden;",
+
+    phoneFocus: false,
   },
 
   _iconLeftTap: function(e) {
@@ -474,6 +476,11 @@ Page({
         });
 
       }
+
+      this.setData({
+        phoneFocus: true
+      })
+
     }
 
   },

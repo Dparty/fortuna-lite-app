@@ -3,6 +3,6 @@
   "projectname": "fortuna-lite-app",
   "setting": {
     "compileHotReLoad": true,
-    "urlCheck": false
+    "urlCheck": true
   }
 }

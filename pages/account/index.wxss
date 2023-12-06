@@ -3,6 +3,7 @@ page{
   background-color: #3B243D; 
 }
 
+
 .svg_icon {
   display: inline-flex;
   width: 2em;
@@ -64,6 +65,7 @@ page{
   /* width: 400rpx;
   height: 400rpx; */
   /* width: 60%; */
+  z-index: 1;
   width: 390rpx;
   height: 390rpx;
 }

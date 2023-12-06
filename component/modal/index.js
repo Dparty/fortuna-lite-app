@@ -31,6 +31,7 @@ Component({
     },
     confirmCallback: null,
     cancelCallback: null,
+    showCancel: false,
   },
   /**
    * 组件的初始数据

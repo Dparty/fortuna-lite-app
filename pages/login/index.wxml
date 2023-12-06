@@ -15,7 +15,7 @@
           <view class="commeon_css tel_input">
             <view class="tel_left" bindtap="choosePhoneCode">
               <view class="svg_icon">
-                <image class="svg_icon-inner" src="../../images/path/phoneIcon.svg" />
+                <image mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/phone.png" />
               </view>
               <text class="areaCode-top">{{chs.convert('区号')}}</text>
               <picker mode="selector" value="{{index}}" range="{{areaCodeArray}}" range-key="{{'label'}}" bindchange="bindPickerChange">
@@ -41,7 +41,7 @@
           <view class="smsCode">
             <text class="{{stCode==0 ? 'hint':'hint-active'}}">{{codePH}}</text>
             <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/codeIcon.svg" />
+              <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/code.png" />
             </view>
             <input id="smsCode" name="verificationCode" maxlength='6' type="text" placeholder="{{codePH}}" bindinput="verificationCodeChange" placeholder-class="{{stCode==0 ? 'ph-hint':'ph-hint-active'}}" bindfocus="codeFocus" bindblur='codeBlur' />
           </view>

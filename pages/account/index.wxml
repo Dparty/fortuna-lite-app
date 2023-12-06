@@ -1,5 +1,7 @@
 <wxs src="../../utils/chs.wxs" module="chs" />  {{chs.setTraditional(isTraditional)}}
+
 <cus-dialog id="cus-dialog"/>
+
 
 <view wx:if="{{ifShowInfo}}" class="info-content">
   <Info userInfo="{{userInfo}}" ifShowInfo="{{ifShowInfo}}"  isTraditional="{{isTraditional}}" bind:returnToAccount='returnToAccount'></Info>
@@ -7,7 +9,7 @@
 
 <view wx:if="{{!ifShowInfo}}" class="content">
   <view class="header">
-    <text class="header-text">{{chs.convert(welcomeText)}} , {{chs.convert(userName)}}</text>
+    <text class="header-text">{{chs.convert(welcomeText)}}，{{userName}}</text>
 
     <TransLg isTraditional="{{isTraditional}}" bind:trans='trans'></TransLg>
   </view>
@@ -21,17 +23,18 @@
     <view>{{userId}}</view> -->
 
 
-      <canvas class="main-content-canvas" canvas-id="myQrcode"></canvas>
+      <canvas wx:if="{{!canvasImg}}" class="main-content-canvas" canvas-id="myQrcode"></canvas>
+      <image wx:else src="{{canvasImg}}" style="width: 390rpx; height: 390rpx;" />
 
       <view class="main-content-bottom">
         <view class="main-content-bottom-block" bindtap="notfinsh">
           <text class="main-content-bottom-block-title"> {{chs.convert('积分')}} </text>
-          <text class="main-content-bottom-block-num"> {{'1249'}} </text>
+          <text class="main-content-bottom-block-num"> {{points}} </text>
         </view>
         <view class="vertical-moulding"></view>
         <view class="main-content-bottom-block" bindtap="notfinsh">
           <text class="main-content-bottom-block-title"> {{chs.convert('卡券')}} </text>
-          <text class="main-content-bottom-block-num"> {{'2'}} </text>
+          <text class="main-content-bottom-block-num"> {{'0'}} </text>
         </view>
 
       </view>
@@ -44,19 +47,19 @@
   <view class="sub-menu">
         <view class="sub-menu-block" bindtap="showInfo">
           <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/userInfo.svg" />
+            <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/info.png" />
             </view>
           <text class="sub-menu-text"> {{chs.convert('个人信息')}} </text>
         </view>
         <view class="sub-menu-block">
           <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/private.svg" />
+            <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/private.png" />
             </view>
           <text class="sub-menu-text"> {{chs.convert('隐私协议')}} </text>
         </view>
         <view class="sub-menu-block" bindtap='logout'>
           <view class="svg_icon">
-              <image class="svg_icon-inner" src="../../images/path/logout.svg" />
+            <image  mode="aspectFit" src="https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/icon/logout.png" />
             </view>
           <text class="sub-menu-text"> {{chs.convert('退出登录')}} </text>
         </view>

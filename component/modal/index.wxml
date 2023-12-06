@@ -5,9 +5,16 @@
     <view class="dialog-content-text">
       <text>{{ message }}</text>
     </view>
-    <view class="operation-view" bindtouchend="onConfirm">
-      <view class="operation-col-view">
-        <text class="confirm-text">{{confirmButtonText}}</text>
+    <view class="button-area">
+      <view wx:if="{{showCancel}}" class="operation-view" bindtouchend="onCancel">
+        <view class="operation-col-view">
+          <text class="confirm-text">{{cancelButtonText}}</text>
+        </view>
+      </view>
+      <view class="operation-view" bindtouchend="onConfirm">
+        <view class="operation-col-view">
+          <text class="confirm-text">{{confirmButtonText}}</text>
+        </view>
       </view>
     </view>
   </view>
