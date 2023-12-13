@@ -33,9 +33,14 @@ Component({
   },
 
   attached: function () {
-    console.log("ready")
+    console.log("ready");
+
     var userInfo = this.properties.userInfo;
-    console.log(userInfo, this.data.genderMap[userInfo.gender]);
+    if(!userInfo){
+      wx.reLaunch({
+        url: '../index/index' // 回到首页
+      })
+    }
     var services = userInfo.services?.map(e => {
       return this.data.typeMap[e]
     }).join('，');

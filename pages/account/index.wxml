@@ -23,7 +23,7 @@
     <view>{{userId}}</view> -->
 
 
-      <canvas wx:if="{{!canvasImg}}" class="main-content-canvas" canvas-id="myQrcode"></canvas>
+      <canvas wx:if="{{!canvasImg}}" class="main-content-canvas" canvas-id="myQrcode" bindtap="notfinsh"></canvas>
       <image wx:else src="{{canvasImg}}" style="width: 390rpx; height: 390rpx;" />
 
       <view class="main-content-bottom">

@@ -60,7 +60,7 @@ Page({
    
   },
   onShow: async function () {
-    const userInfo = app.globalData.userInfo;
+    var userInfo = app.globalData.userInfo;
     const renderHeight = app.globalData.systeminfo.windowWidth / 2;
     this.setData({renderHeight: renderHeight});
 
@@ -73,8 +73,11 @@ Page({
         width: renderHeight,
         height: renderHeight,
         canvasId: 'myQrcode',
-        ctx: wx.createCanvasContext('myQrcode'),
-        text: userInfo.id,
+        text: "This service has not been activated yet",
+      })
+    }else{
+      wx.reLaunch({
+        url: '../index/index',
       })
     }
     if(!wx.getStorageSync('token')){
@@ -125,7 +128,7 @@ Page({
           width: that.data.renderHeight,
           height:  that.data.renderHeight,
           canvasId: 'myQrcode',
-          text: that.data.userInfo.id,
+          text: "This service has not been activated yet",
         })
       }
   });
@@ -152,7 +155,10 @@ Page({
  },
 
   showInfo: function () {
-    this.setData({ifShowInfo: true});
+    console.log(this.data.userInfo)
+    if(this.data.userInfo){
+      this.setData({ifShowInfo: true});
+    }
   },
 
   notfinsh: function () {
@@ -169,7 +175,7 @@ Page({
           width: that.data.renderHeight,
           height:  that.data.renderHeight,
           canvasId: 'myQrcode',
-          text: that.data.userInfo.id,
+          text: "This service has not been activated yet",
         })
       }
   });
@@ -209,8 +215,7 @@ Page({
       width: this.data.renderHeight,
       height: this.data.renderHeight,
       canvasId: 'myQrcode',
-      // ctx: wx.createCanvasContext('myQrcode'),
-      text: app.globalData.userInfo.id,
+      text: "This service has not been activated yet",
     })
   }
 
