@@ -28,7 +28,7 @@ Page({
       label: "餐饮新品",
       title: "餐饮新品",
       subTitle: "由专业厨艺团队为您调理中西式佳肴美食",
-      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/menu-crop.jpg",
+      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/intro.jpg",
       url: "../outer-menu/menu",
     }]
   },
