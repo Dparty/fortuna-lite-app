@@ -21,7 +21,7 @@ Page({
       label: "酒店介绍",
       title: "酒店介绍",
       subTitle: "财神酒店位于澳门最繁盛的新口岸区",
-      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/hotel-crop.jpg",
+      img: "https://static-1318552943.cos.ap-singapore.myqcloud.com/gow/images/homepage.jpg",
       url: "../outer-hotel/intro",
     }, {
       id: 2,

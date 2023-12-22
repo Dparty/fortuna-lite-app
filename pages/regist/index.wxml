@@ -139,8 +139,8 @@
           <checkbox-group bindchange="checkboxChange">
             <label class="checkbox">
               <checkbox value="agree" checked="{{agreeChecked}}" />{{chs.convert('本人已阅读并同意')}}
-              <text bindtap="agreement1">{{chs.convert('《隐私政策》')}}</text>
-              及<text bindtap="agreement2">{{chs.convert('《用户协议》')}}</text>
+              <text catchtap="showPolicy" >{{chs.convert('《隐私政策》')}}</text>
+              及<text bindtap="showAgreement">{{chs.convert('《用户协议》')}}</text>
             </label>
           </checkbox-group>
         </view>

@@ -25,6 +25,14 @@ Component({
       type: String,
       value: ''
     },
+    style: {
+      type: String,
+      value: ''
+    },
+    textStyle: {
+      type: String,
+      value: ''
+    },
     show: {
       type: Boolean,
       value: false,
@@ -32,6 +40,7 @@ Component({
     confirmCallback: null,
     cancelCallback: null,
     showCancel: false,
+
   },
   /**
    * 组件的初始数据

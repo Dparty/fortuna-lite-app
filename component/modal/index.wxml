@@ -1,8 +1,8 @@
-<view class="dialog-overlay-view" style="width: {{ windowWidth }}px; height: {{ windowHeight }}px; display: {{ show ? 'block' : 'none' }};"></view>
+<view class="dialog-overlay-view" style="width: {{ windowWidth }}px; height: {{ windowHeight }}px; display: {{ show ? 'block' : 'none' }}; "></view>
 
 <view class="col-center" style="width: {{ windowWidth }}px; height: {{ windowHeight }}px; display: {{ show ? 'flex' : 'none' }};">
-  <view class="dialog-content-view">
-    <view class="dialog-content-text">
+  <view class="dialog-content-view" style="{{style}}">
+    <view class="dialog-content-text"style="{{textStyle}}">
       <text>{{ message }}</text>
     </view>
     <view class="button-area">
